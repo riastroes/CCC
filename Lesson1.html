@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<title>CCC: Lesson 1</title>
+<META NAME="COPYRIGHT" CONTENT="&copy; Ria Stroes">
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+<META name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-pink.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<script src="../mylib/Google.js" type="text/javascript"></script>
+<style>
+.w3-sidenav a {padding:16px;font-weight:bold}
+</style>
+<body>
+
+<nav class="w3-sidenav w3-collapse w3-white w3-animate-left w3-card-2" style="z-index:3;width:250px;" id="mySidenav">
+  <a href="#index.html" class="w3-border-bottom w3-large">Lessons</a>
+  <a href="javascript:void(0)" onclick="w3_close()"
+  class="w3-text-teal w3-hide-large w3-closenav w3-large">Close <i class="fa fa-remove"></i></a>
+  <a href="#" class="w3-light-grey w3-medium"></a>
+  <a href="index.html">Introduction</a>
+  <a href="lesson1.html">Lesson 1</a>
+  <a href="lesson2.html">Lesson 2</a>
+  <a href="lesson3.html">Lesson 3</a>
+  <a href="lesson4.html">Lesson 4</a>
+  <a href="lesson5.html">Lesson 5</a>
+  <a href="lesson6.html">Lesson 6</a>
+  <a href="lesson7.html">Lesson 7</a>
+</nav>
+
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
+
+<div class="w3-main" style="margin-left:250px;">
+
+<div id="myTop" class="w3-top w3-container w3-padding-16 w3-theme w3-large">
+  <i class="fa fa-bars w3-opennav w3-hide-large w3-xlarge w3-margin-left w3-margin-right" onclick="w3_open()"></i>
+  <span id="myIntro" class="w3-hide">Creative Coding Course in P5</span>
+</div>
+
+<header class="w3-container w3-theme w3-padding-64" style="padding-left:16px">
+  <h1 class="w3-xxxlarge w3-padding-16">Creative Coding Course</h1>
+  <h2 class="w3-large">Lesson 1: Getting started</h2>
+</header>
+
+<div class="w3-container" >
+
+<div class="w3-row">
+  <div class="w3-twothird w3-container">
+    <br/><br/>
+    <p>
+      You can start with P5 on <a href="www.openprocessing.com">www.openprocessing.com</a> Here you can find an online editor where you can program and use the P5 library.
+      You don't need to install anything. You only have to create an account and you can use the online editor for free.
+      You can find all the examples from this course on this site.
+      Or you can download the P5 editor from the <a href="P5js.org">P5js.org</a> site.
+      In these lessons I will use the online editor, so I can show you some examples.
+    </p>
+
+    <h2 class="w3-theme-l2 w3-center">Getting Started ...</h2>
+
+  </div>
+  <div class="w3-third w3-container">
+    <ul class="w3-ul">
+      <li><h2>You will learn</h2></li>
+      <li>p5 editor</li>
+      <li>openprocessing</li>
+      <li>functions</li>
+      <li>createCanvas</li>
+      <li>windowWidth</li>
+      <li>windowHeight</li>
+      <li>camelcase</li>
+    </ul>
+  </div>
+</div>
+<div class="w3-row">
+  <div class="w3-one " style="padding:16px">
+    <h2>www.openprocessing.com</h2>
+    <p>
+      When you start in openprocessing, check the settings. <br/>
+      You need to start in P5 mode.
+      And check the option Show the console. It will give you error information.
+    </p>
+    <img src="resources/openprocessing settings.jpg" alt="settings" class="w3-image"/>
+    <p>Every P5 sketch will start with two function:
+    </p>
+
+        <pre>
+          function setup(){
+             instruction 1;
+             instruction 2;
+             instruction 3;
+             etc.
+          }
+
+          function draw(){
+             instruction 1;
+             instruction 2;
+             instruction 3;
+             etc.
+             start again with instruction 1;
+          }
+        </pre>
+        <p>In the setup function, between the curly brackets you can write instruction for the computer.
+           These instructions will be executed from top to bottom. Every instruction has to end with a semicolumn.
+           When the webpage is loaded, P5 will call the setup function to execute.
+           After the computer has executed the setup function it will call the draw function. The draw function will
+           be executed <strong> 60 times a second </strong>. In the draw function you write your drawing instructions for <thead>
+           computer.
+           </thead>
+        </p>
+        <p>
+          In the setup function you have to prepare your canvas. In the example above is a canvas created:
+        </p>
+          <pre>
+        createCavas(windowWidth, windowHeight);
+          </pre>
+          <p>
+           createCanvas is a function that needs two params in wich you specify the width and the height of the canvas.<br/>
+
+           windowWidth is a variable of P5 that stores the width of your screen in pixels.<br/>
+           windowHeight is a variable of P5 that stores the height of your screen in pixels.<br/>
+           <br/>
+           You can make a smaller or bigger canvas by changing the params<br/>
+         </p>
+         <pre>
+        createCanvas(500, 400);
+         </pre>
+          <p>
+           Now the width is 500 pixels and the height is 400 pixels.<br/>
+           Can you see the difference between a function and a variable? <br/>
+           A functions always has brackets (), even if the function does not need any params.
+           Notice that functionsnames and variablesnames both are written in 'camelcase':<br/><br/>
+         </p>
+          <ul>
+           <li>the first word in the name is always starting with a small character.</li>
+           <li>the next words in the name are always starting with a capital.</li>
+           <li>the words are written together, without spacing or underscores.</li>
+         </ul>
+         <p>Don't forget to run the example in openprocessing. See what's happening and try to read the code.
+           In the next lessons you will learn to write your own code.</p>
+
+</div>
+
+<footer class="w3-container w3-theme-d3 w3-padding-32" style="padding-left:32px">
+  <p>copyright &copy; Ria Stroes.<br/>
+  <a href="http://www.riastroes.nl">www.riastroes.nl</a></p>
+</footer>
+</div>
+
+
+
+<script>
+// Open and close the sidenav on medium and small screens
+function w3_open() {
+    document.getElementById("mySidenav").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidenav").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+
+// Change style of top container on scroll
+window.onscroll = function() {myFunction()};
+function myFunction() {
+    if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+        document.getElementById("myTop").classList.add("w3-card-4");
+        document.getElementById("myIntro").classList.add("w3-show-inline-block");
+    } else {
+        document.getElementById("myIntro").classList.remove("w3-show-inline-block");
+        document.getElementById("myTop").classList.remove("w3-card-4");
+    }
+}
+
+// Accordions
+function myAccordion(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+        x.previousElementSibling.className += " w3-theme";
+    } else {
+        x.className = x.className.replace("w3-show", "");
+        x.previousElementSibling.className =
+        x.previousElementSibling.className.replace(" w3-theme", "");
+    }
+}
+</script>
+
+</body>
+</html>

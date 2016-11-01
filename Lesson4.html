@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<title>CCC: Lesson 4</title>
+<META NAME="COPYRIGHT" CONTENT="&copy; Ria Stroes">
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+<META name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-pink.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.min.js" type="text/javascript"></script>
+<script src="../mylib/Google.js" type="text/javascript"></script>
+
+<style>
+
+.w3-sidenav a {padding:16px;font-weight:bold}
+</style>
+<body>
+
+<nav class="w3-sidenav w3-collapse w3-white w3-animate-left w3-card-2" style="z-index:3;width:250px;" id="mySidenav">
+  <a href="#index.html" class="w3-border-bottom w3-large">Lessons</a>
+  <a href="javascript:void(0)" onclick="w3_close()"
+  class="w3-text-teal w3-hide-large w3-closenav w3-large">Close <i class="fa fa-remove"></i></a>
+  <a href="#" class="w3-light-grey w3-medium"></a>
+  <a href="index.html">Introduction</a>
+  <a href="lesson1.html">Lesson 1</a>
+  <a href="lesson2.html">Lesson 2</a>
+  <a href="lesson3.html">Lesson 3</a>
+  <a href="lesson4.html">Lesson 4</a>
+  <a href="lesson5.html">Lesson 5</a>
+  <a href="lesson6.html">Lesson 6</a>
+  <a href="lesson7.html">Lesson 7</a>
+
+
+</nav>
+
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
+
+<div class="w3-main" style="margin-left:250px;">
+
+<div id="myTop" class="w3-top w3-container w3-padding-16 w3-theme w3-large">
+  <i class="fa fa-bars w3-opennav w3-hide-large w3-xlarge w3-margin-left w3-margin-right" onclick="w3_open()"></i>
+  <span id="myIntro" class="w3-hide">Creative Coding Course in P5</span>
+</div>
+
+<header class="w3-container w3-theme w3-padding-64" style="padding-left:16px">
+  <h1 class="w3-xxxlarge w3-padding-16">Creative Coding Course</h1>
+  <h2 class="w3-large">Lesson 4: Lines</h2>
+</header>
+
+<div class="w3-container" >
+
+<div class="w3-row">
+  <div class="w3-twothird w3-container">
+    <p>
+      Lines are wonderful. You can do so much with lines. You can create
+    </p>
+    <ul>
+        <li>Forms, Shapes, Figures</li>
+        <li>Contours</li>
+        <li>Patterns</li>
+        <li>Shading</li>
+        <li>Perspective and space</li>
+        <li>Optical illusions</li>
+    </ul>
+    <p>In this lesson we will look at the straight lines only. </p>
+  </div>
+  <div class="w3-third w3-container">
+    <ul class="w3-ul">
+      <li><h2>You will learn</h2></li>
+      <li>line</li>
+      <li>stroke</li>
+      <li>strokeWeight</li>
+      <li>position</li>
+    </ul>
+  </div>
+</div>
+<div class="w3-row">
+  <div class="w3-one " style="padding:16px">
+    <h2 class="w3-theme-l2 w3-center">Lines</h2>
+    <p id="how1">
+      You can create a straight with the line function.<br/>
+      You always need two points to create a line.<br/>
+    </p>
+    <pre id="how2">
+      line(x, y, x1, y1);
+    </pre>
+    <p id="how3">
+        The line function has four params:
+    </p>
+    <ul id="how4" class="white">
+      <li>the first two params are the begin-position (x,y) of the line</li>
+      <li>the third and the fourth params are the end-position(x1,y1) position of the line.</li>
+    </ul>
+    <p id="how5">
+      Lines needs the same drawing tools as the point.
+      You need a stroke function, so your drawingtool knows which color to use.
+      You need a strokeWeight function, to tell your drawingtool how width your line should be.<br/><br/>
+      The beginning and the end of the line can be set inside or outside the canvas.
+    </p>
+    <p id="how6">
+      In the next lesson as we learn more about variables you can start enjoying repeating lines on a smart way.
+      Now you have to draw indidual lines, so make them special.
+    </p>
+    </div>
+  </div>
+
+  <div class="w3-row w3-theme-light">
+  <div class="w3-container w3-half  ">
+      <pre>
+        function setup(){
+          createCanvas(300,300);
+          background(100);
+        }
+
+        function draw(){
+          stroke(240);
+          strokeWeight(30);
+          line(85, 130, 200,155);
+
+          stroke(160);
+          strokeWeight(20);
+          line(50, 230, 200,-10);
+
+          stroke(80);
+          strokeWeight(10);
+          line(40, 250, 240,160);
+
+          stroke(0);
+          strokeWeight(1);
+          line(5, 290, 180,200);
+          line(180,200, 100,20);
+          line(100,20,5,290);
+        }
+  </pre>
+  </div>
+  <div class="w3-half w3-container">
+    <div class="w3-example">
+      <br/>
+      <div id="divcanvas">
+        <script>
+        var s1 = function( p ) {
+        p.setup = function() {
+          var canvas = p.createCanvas(300,300);
+          canvas.parent("divcanvas");
+          p.background(100);
+        }
+
+        p.draw = function() {
+          p.stroke(240);
+          p.strokeWeight(30);
+          p.line(85, 130, 200,155);
+
+          p.stroke(160);
+          p.strokeWeight(20);
+          p.line(50, 230, 200,-10);
+
+          p.stroke(80);
+          p.strokeWeight(10);
+          p.line(40, 250, 240,160);
+
+          p.stroke(0);
+          p.strokeWeight(1);
+          p.line(5, 290, 180,200);
+          p.line(180,200, 100,20);
+          p.line(100,20,5,290);
+        }
+      };
+        var my1 = new p5(s1, 'c1');
+        </script>
+      </div>
+      <p>
+        <a href="https://www.openprocessing.org/sketch/386647">open sketch in openprocessing</a>
+      </p>
+
+    </div>
+    </div>
+  </div>
+  <div class="w3-row  w3-theme-light">
+    <div class="w3-container w3-half">
+    <br/>
+    <div id="divcanvas2">
+      <script>
+      var s2= function( p ) {
+        p.setup = function() {
+          var canvas2 = p.createCanvas(300,300);
+          canvas2.parent("divcanvas2");
+          p.background(100);
+        }
+
+        p.draw = function() {
+
+          p.stroke(255);
+          p.strokeWeight(0.5);
+          p.line(p.width/2,p.height/2,p.mouseX, p.mouseY);
+        }
+      };
+      var my2 = new p5(s2, 'c2');
+      </script>
+    </div>
+    <p>
+      <a href="https://www.openprocessing.org/sketch/387862">open sketch in openprocessing</a>
+    </p>
+
+</div>
+
+<div class="w3-container w3-half ">
+  <p>Move your mouse over this canvas and draw a beautiful flower in the center of the canvas with your mouse.</p>
+
+    <pre>
+  function setup(){
+    createCanvas(300,300);
+    background(100);
+  }
+
+  function draw(){
+    stroke(255);
+    strokeWeight(0.5);
+    line(width/2,height/2,mouseX, mouseY);
+  }
+</pre>
+</div>
+
+</div>
+<div class="w3-row">
+    <div class="w3-one " style="padding:16px">
+      <p>
+        In the second example there are two more tricks. I started the line in the center of the canvas.
+        You can find the center of a canvas by
+      </p>
+      <pre>
+        x-position of the center of the canvas = width/2;
+        y-position of the center of the canvas = height/2;
+      </pre>
+      <p>After you create a canvas, p5 stores the width of the canvas in the variable width.
+        and the height of the canvas in the variable height.
+      </p>
+      <p>Two other variables of p5 are mouseX and mouseY. p5 stores the position of the mouse
+        in these two variables.</p>
+      <p>You will learn more about variables in the next lesson.</p>
+</div>
+
+<div class="w3-row">
+    <div class="w3-one " style="padding:16px">
+<h1  class="w3-theme-l2 w3-center w3-jumbo">Assignments</h1>
+
+<h3>1. P5 Reference</h3>
+      <ul class="w3-ul">
+      <li>Go to the reference op P5 at <a href="http://p5js.org/reference">p5js.org/reference</a></li>
+      <li>Search for the line method</li>
+      <li>You can find every function (or method) back in the Reference.</li>
+      <li>In openprocessing go to the menu on the right side of your screen. Next to the
+        tab Setting you find two more tabs Files and Reference.
+        Click on the Reference tab and click on a functionname in the list.
+        You will find the P5 reference page about this function.</li>
+      <li>Can you find anything about the linecap?</li>
+    </ul>
+<h3>2. It's snowing!</h3>
+      <ul class="w3-ul">
+        <li>Create a canvas, choise your own size.</li>
+        <li>Use a black background</li>
+        <li>Create snowflocks with lines and points.</li>
+        <li>Mail me your most beautiful snowflock.</li>
+      </ul>
+<h3>3. Lines</h3>
+  <ul class="w3-ul">
+    <li>Create a canvas, choise your own size.</li>
+    <li>Think about the functions of the line and show this in a sketch.</li>
+    <li>See the list at the beginnen of this page.</li>
+  </ul>
+  <hr>
+  <p>It would be very nice if you save your sketches on openprocessing with two tags: ccc, lesson4.<br/>
+  And publish an image of your sketch on our Facebook page <a href="https://www.facebook.com/creativecodingcourse">https://www.facebook.com/creativecodingcourse</a><br/>
+    It will be an inspiration for other students.</p>
+  <hr>
+  </div>
+  </div>
+
+  <footer class="w3-container w3-theme-d3 w3-padding-32" style="padding-left:32px">
+    <p>If you have any question about this lesson, send me an email <a href="mailto:riastroes@gmail.com?subject:lesson4">riastroes@gmail.com</a><br/>
+    copyright &copy; Ria Stroes.<br/>
+    <a href="http://www.riastroes.nl">www.riastroes.nl</a></p>
+  </footer>
+  </div>
+
+
+<script>
+// Open and close the sidenav on medium and small screens
+function w3_open() {
+    document.getElementById("mySidenav").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidenav").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+
+// Change style of top container on scroll
+window.onscroll = function() {myFunction()};
+function myFunction() {
+    if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+        document.getElementById("myTop").classList.add("w3-card-4");
+        document.getElementById("myIntro").classList.add("w3-show-inline-block");
+    } else {
+        document.getElementById("myIntro").classList.remove("w3-show-inline-block");
+        document.getElementById("myTop").classList.remove("w3-card-4");
+    }
+}
+
+// Accordions
+function myAccordion(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+        x.previousElementSibling.className += " w3-theme";
+    } else {
+        x.className = x.className.replace("w3-show", "");
+        x.previousElementSibling.className =
+        x.previousElementSibling.className.replace(" w3-theme", "");
+    }
+}
+</script>
+
+</body>
+</html>
