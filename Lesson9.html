@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+<title>CCC: Lesson 9</title>
+<META NAME="COPYRIGHT" CONTENT="&copy; Ria Stroes">
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+<META name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-pink.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/addons/p5.dom.min.js" type="text/javascript"></script>
+<script src="http://www.w3schools.com/lib/w3data.js"></script>
+<script src="../mylib/Google.js" type="text/javascript"></script>
+<style>
+.w3-sidenav a {padding:16px;}
+</style>
+<body>
+  <div w3-include-html="menu.html"></div>
+
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
+
+<div class="w3-main" style="margin-left:250px;">
+
+<div id="myTop" class="w3-top w3-container w3-padding-16 w3-theme w3-large">
+  <i class="fa fa-bars w3-opennav w3-hide-large w3-xlarge w3-margin-left w3-margin-right" onclick="w3_open()"></i>
+  <span id="myIntro" class="w3-hide">Creative Coding Course in P5</span>
+</div>
+
+<header class="w3-container w3-theme w3-padding-64" style="padding-left:16px">
+  <h1 class="w3-xxxlarge w3-padding-16">Creative Coding Course</h1>
+  <h2 class="w3-large">Lesson 9: If .. Else</h2>
+</header>
+
+<div class="w3-container" >
+
+<div class="w3-row">
+  <div class="w3-twothird w3-container">
+    <div class="w3-container  w3-center">
+    <br/>
+
+
+   <img class="w3-image" src="resources/maze.png" alt="maze" />
+ </div>
+
+ <pre>
+   if(you are lost){
+     start over ..
+   }
+   else{
+     Go on!
+     Your are doing great!
+   }
+ </pre>
+ <p>
+   Sometimes we need more control or we will be lost...
+</p>
+  </div>
+  <div class="w3-third w3-container">
+    <ul class="w3-ul">
+      <li><h2>You will learn</h2></li>
+      <li>if</li>
+      <li>&amp;&amp;  AND</li>
+      <li>||  OR</li>
+      <li>if .. else</li>
+      <li>frameCount</li>
+      <li>greater then or equal &gt;=</li>
+      <li>less then or equal &lt;=</li>
+  </ul>
+  </div>
+</div>
+<div class="w3-row">
+  <div class="w3-one " style="padding:16px">
+    <h2 class="w3-theme-l2 w3-center">if</h2>
+    <p>Let's start with an example with two conditions.<br/>
+    This blue dot is wandering within the borders of the canvas.<br/>
+    We control the borders.</p>
+</div>
+</div>
+<div class="w3-row  w3-theme-light ">
+<div class="w3-container w3-half">
+<pre>
+  var x,y;
+  function setup(){
+    createCanvas(400, 400);
+    //start in the center
+    x = width/2;
+    y = height/2;
+  }
+  function draw(){
+    background(200);
+    stroke(0, 191, 255);
+    strokeWeight(80);
+
+    //Here you need two conditions.
+    if(x > 0 &amp;&amp; x < width){
+      x += random(-5,5);
+    }
+    if(y > 0 &amp;&amp; y < height){
+      y += random(-5,5);
+    }
+    point(x,y);
+
+  }
+</pre>
+</div>
+<div class="w3-half w3-container">
+  <div class="w3-example">
+    <br/>
+    <div id="divcanvas">
+      <script>
+      var s1 = function( p ) {
+      var x, y;
+      p.setup = function() {
+        var canvas = p.createCanvas(400,400);
+        canvas.parent("divcanvas");
+        x = p.width/2;
+        y = p.height/2;
+      }
+      p.draw = function() {
+        p.background(200);
+        p.stroke(0, 191, 255);
+        p.strokeWeight(80);
+        //Here you need two conditions.
+        if(x > 0 && x < p.width){
+          x += p.random(-5,5);
+        }
+        if(y > 0 && y < p.height){
+          y += p.random(-5,5);
+        }
+        p.point(x,y);
+
+     }
+    };
+      var my1 = new p5(s1, 'c1');
+      </script>
+    </div>
+    <p>
+      <a href="https://www.openprocessing.org/sketch/388110">open sketch in openprocessing</a>
+    </p>
+
+  </div>
+</div>
+</div>
+<p>
+  But there is something wrong, the blue dot can get stuck in the corners.
+  Do you know why?  Think about it.
+</p>
+<div class="w3-row  w3-theme-light ">
+<div class="w3-container w3-half">
+<pre>
+  var x,y;
+  function setup(){
+    createCanvas(400, 400);
+    //start in the center
+    x = width/2;
+    y = height/2;
+  }
+  function draw(){
+    background(200);
+    stroke(0, 191, 255);
+    strokeWeight(80);
+
+    //Here you need two conditions.
+    if(x > 0 &amp;&amp; x < width){
+      x += random(-5,5);
+    }
+    else{
+      x = width/2;
+    }
+    if(y > 0 &amp;&amp; y < height){
+      y += random(-5,5);
+    }
+    else{
+      y = height/2;
+    }
+    point(x,y);
+
+  }
+</pre>
+</div>
+<div class="w3-half w3-container">
+  <p>The painter</p>
+  <div class="w3-example">
+
+    <br/>
+    <div id="divcanvas2">
+      <script>
+      var s2 = function( p ) {
+      var x, y;
+      p.setup = function() {
+        var canvas = p.createCanvas(400,400);
+        canvas.parent("divcanvas2");
+        x = p.width/2;
+        y = p.height/2;
+      }
+      p.draw = function() {
+        //p.background(200,10);
+        p.stroke(0, 191, 255,10);
+        p.strokeWeight(80);
+        //Here you need two conditions.
+        if(x > 0 && x < p.width){
+          x += p.random(-5,5);
+        }
+        else{
+          x = p.width/2;
+        }
+        if(y > 0 && y < p.height){
+          y += p.random(-5,5);
+        }
+        else{
+          y = p.height/2;
+        }
+        p.point(x,y);
+
+     }
+    };
+      var my1 = new p5(s2, 'c1');
+      </script>
+    </div>
+    <p>
+      <a href="https://www.openprocessing.org/sketch/388112">open sketch in openprocessing</a>
+    </p>
+
+  </div>
+</div>
+</div>
+<p>
+  There is allways a solution, maybe you can think of another solution to solve this problem.
+</p>
+<p>You can also control your frames with these conditionals. frameCount is a p5 variable that stores a counter for the frame you see.
+  You can use this variable to create scenes or layers, like this:
+</p>
+<div class="w3-row  w3-theme-light ">
+<div class="w3-container w3-half">
+<pre>
+
+  function setup(){
+    createCanvas(400, 400);
+
+
+  }
+  function draw(){
+
+    //layer construction
+    if(frameCount > 0 &amp;&amp; frameCount < 200){
+      stroke(0, 191, 255);
+      strokeWeight(80);
+      point(random(width), random(height),30,30);
+    }
+    else if(frameCount >= 200 &amp;&amp; frameCount < 400){
+      stroke(191, 255, 0);
+      strokeWeight(5);
+      noFill();
+      ellipse(random(width), random(height),60,60);
+    }
+    else if(frameCount >= 400 &amp;&amp; frameCount < 600){
+      stroke(0, 191, 255);
+      strokeWeight(5);
+      noFill();
+      rect(random(width), random(height),40,40);
+    }
+    else if(frameCount >= 600 &amp;&amp; frameCount < 800){
+      noStroke();
+      fill(255, 191, 0);
+      rect(random(width), random(height),40,40);
+    }
+    else{           // without a condition
+      noLoop();
+    }
+
+  }
+</pre>
+</div>
+
+<div class="w3-half w3-container">
+  <p>An abstract painting</p>
+  <div class="w3-example">
+
+    <br/>
+    <div id="divcanvas3">
+      <script>
+      var s3 = function( p ) {
+      p.setup = function() {
+        var canvas = p.createCanvas(400,400);
+        canvas.parent("divcanvas3");
+
+      }
+      p.draw = function() {
+        //layer construction
+        if(p.frameCount > 0 && p.frameCount < 200){
+          p.stroke(0, 191, 255);
+          p.strokeWeight(80);
+          p.point(p.random(p.width), p.random(p.height),30,30);
+        }
+        else if(p.frameCount >= 200 && p.frameCount < 400){
+          p.stroke(255,191, 0);
+          p.strokeWeight(5);
+          p.noFill();
+          p.ellipse(p.random(p.width), p.random(p.height),60,60);
+        }
+        else if(p.frameCount >= 400 && p.frameCount < 600){
+          p.stroke(0, 191, 255);
+          p.strokeWeight(5);
+          p.noFill();
+          p.rect(p.random(p.width), p.random(p.height),40,40);
+        }
+        else if(p.frameCount >= 600 && p.frameCount < 800){
+          p.noStroke();
+          p.fill(255, 191, 0);
+          p.rect(p.random(p.width), p.random(p.height),40,40);
+        }
+        else{           // without a condition
+          noLoop();
+        }
+
+     }
+    };
+      var my1 = new p5(s3, 'c1');
+      </script>
+    </div>
+    <p>
+      <a href="https://www.openprocessing.org/sketch/388114">open sketch in openprocessing</a>
+    </p>
+
+  </div>
+</div>
+</div>
+<div class="w3-row">
+    <div class="w3-one " style="padding:16px">
+      <p>It is allowed to nest if statements.</p>
+      <pre>
+      if(frameCount > 100){
+        if(x < 10){
+
+        }
+      }
+      <pre>
+        <p>
+          Tip! Your code is easier to read if you indent within the curly brackes.
+        </p>
+
+    </div>
+</div>
+
+<div class="w3-row">
+    <div class="w3-one " style="padding:16px">
+
+<h1  class="w3-theme-l2 w3-center w3-jumbo">Assignments</h1>
+<h3>1. Abstract painting</h3>
+  <ul class="w3-ul">
+    <li>Create your own abstract painting in layers.</li>
+  </ul>
+<h3>2. Create a strip</h3>
+  <ul class="w3-ul">
+    <li>First make sketches, 5 thumbnails.</li>
+    <li>sketch 1: your animal.</li>
+    <li>sketch 2: your animal meets an object.</li>
+    <li>sketch 3: something happens.</li>
+    <li>sketch 4: closeup of the face expression of your animal.</li>
+    <li>sketch 5: your animal walks away.</li>
+    <li>use frameCount to create scenes.</li>
+  </ul>
+  <h3>1. The Box of Pandora</h3>
+    <ul class="w3-ul">
+      <li>Create a little beautiful box.</li>
+      <li>After 200 frames the box opens and what is coming out?</li>
+    </ul>
+<hr>
+<p>Please save your sketches on openprocessing with two tags: ccc, lesson9.<br/>
+Or publish an image of your sketch on our Facebook page <a href="https://www.facebook.com/creativecodingcourse">https://www.facebook.com/creativecodingcourse</a><br/>
+It will be an inspiration for other students.<br/>
+If you have any question about this lesson, send me an email <a href="mailto:riastroes@gmail.com?subject:lesson9">riastroes@gmail.com</a></p>
+</div>
+</div>
+<footer class="w3-container w3-theme-d3 w3-padding-32" style="padding-left:32px">
+    <span class="w3-left"><a  href="http://www.riastroes.nl">www.riastroes.nl</a></span><span class="w3-right">copyright &copy; Ria Stroes</span>
+</footer>
+</div>
+<script>
+//include HTML
+w3IncludeHTML();
+
+// Open and close the sidenav on medium and small screens
+function w3_open() {
+    document.getElementById("mySidenav").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidenav").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+
+// Change style of top container on scroll
+window.onscroll = function() {myFunction()};
+function myFunction() {
+    if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+        document.getElementById("myTop").classList.add("w3-card-4");
+        document.getElementById("myIntro").classList.add("w3-show-inline-block");
+    } else {
+        document.getElementById("myIntro").classList.remove("w3-show-inline-block");
+        document.getElementById("myTop").classList.remove("w3-card-4");
+    }
+}
+
+// Accordions
+function myAccordion(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+        x.previousElementSibling.className += " w3-theme";
+    } else {
+        x.className = x.className.replace("w3-show", "");
+        x.previousElementSibling.className =
+        x.previousElementSibling.className.replace(" w3-theme", "");
+    }
+}
+</script>
+
+</body>
+</html>
