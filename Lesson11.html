@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>CCC: Lesson 10</title>
+<title>CCC: Lesson 11</title>
 <META NAME="COPYRIGHT" CONTENT="&copy; Ria Stroes">
 <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 <META name="viewport" content="width=device-width, initial-scale=1">
@@ -29,7 +29,7 @@
 
 <header class="w3-container w3-theme w3-padding-64" style="padding-left:16px">
   <h1 class="w3-xxxlarge w3-padding-16">Creative Coding Course</h1>
-  <h2 class="w3-large">Lesson 10: Images</h2>
+  <h2 class="w3-large">Lesson 11: Smart positioning</h2>
 </header>
 
 <div class="w3-container" >
@@ -37,12 +37,123 @@
 <div class="w3-row">
   <div class="w3-twothird w3-container">
     <div class="w3-container">
-    <br/>
+      <br/>
+    <p>
+    If you create a canvas with windowWidth and windowHeight params. Your sketch will look different on different devices.
+    Of course it's nice to have a sketch as width as your screen and may be as height as your screen,
+    but now you don't know where the center of sketch is and how big the shapes should be in your drawing.
+    So it's a choise depending on your plan with a sketch. For now if you are just sketching for fun and for learning purpose it is
+    nice to create a sketch with windowWidth and windowHeight params in your createCanvas function and you have to use relative or smart positioning.
+  </p>
+  </div>
+  </div>
+  <div class="w3-third w3-container">
+    <ul class="w3-ul">
+      <li><h2>You will learn</h2></li>
+      <li>relative position</li>
+      <li>mouseX, mouseY</li>
+      <li>width</li>
+      <li>height</li>
+      <li>center</li>
+
+  </ul>
+  </div>
+</div>
+<div class="w3-row">
+  <div class="w3-one w3-container">
+    <div class="w3-container">
+      <br/>
+      <h2 class="w3-theme-l2 w3-center">Smart positioning</h2>
+    <p>
+    You already know a couple of smart positions.<br/>
+    Variable from p5 are smart.<br/>
+    mouseX,mouseY is the position of your mousepointer. This is true for every device.<br/>
+    pmouseX and pmouseY are the previous position of your mousepointer. This is true for every device.<br/>
+    After you create a canvas, the variables width and height store the value of the width and height of your canvas.
+    With these two variable you know a lot more then only the width and the height of the canvas.
+    <p>
+    <pre>
+      //top left corner
+      (0,0)
+      //top right corner
+      (width,0)
+      //bottom left corner
+      (0, height)
+      //bottom right corner
+      (width,height)
+      //center
+      (width/2, height/2);
+      //other positions
+      (width/4, 100);
+      (width/4 * 3, 100);
+      (0, height/3);
+    </pre>
+    <p>The same for your mousepointer position.
+      <pre>
+        mouseX + 10 is 10 pixels to the right of your current mousepointer position.
+        mouseX - 100 is 100 pixels to the left of your current mousepointer position.
+        mouseY + 10 is 10 pixels lower then your current mousepointer position.
+        mouseX - 100 is 100 pixels hight then your current mousepointer position.
+        etc.
+      </pre>
+    <p>When you create a figure or shape with several parts. It is smart to use one anchor point and all the other positions are relative to this achor,
+      so when you move the anchor, all the other points will move.
+      Let's say your anchor is stored in the variables x and y.
+      the value of your x and y can have a relative position, like x = width/2 and y = height/4.</p>
+      <pre>
+        x + 10 is 10 pixels to the right of your anchor.
+        x - 100 is 100 pixels to the left of your anchor.
+        y + 10 is 10 pixels lower then your anchor.
+        y - 100 is 100 pixels hight then your anchor.
+        etc.
+      </pre>
+      <p>The assignments let you practice these techniques.</p>
+  </div>
+  </div>
 
 </div>
-</div>
+
+  <div class="w3-row">
+      <div class="w3-one " style="padding:16px">
+  <h1  class="w3-theme-l2 w3-center w3-jumbo">Assignments</h1>
+
+  <h3>1. Tangram puzzle</h3>
+
+    <ul class ="w3-ul" >
+      <li>You can find some information about a tangram puzzle in wikipedia. (Google search: wiki tangram)</li>
+      <li>Create a canvas as width and height as your screen</li>
+      <li>All the pieces of a tangram puzzle make a rectangle with a size half your screen and a height half your screen.</li>
+      <li>First make a sketch on graph paper. This is so important for all your designs. It will save you a lot of time. :-)</li>
+      <li>Use smart positioning.</li>
+  </ul>
+
+
+    <h3>2. Tangram figure/shape</h3>
+
+      <ul class ="w3-ul" >
+        <li>Create a canvas as width and height as your screen</li>
+        <li>Use the pieces of your tangram puzzle to great a figure.</li>
+        <li>Make a sketch on graph paper. </li>
+        <li>Use smart positioning!</li>
+    </ul>
+    <h3>3. A moving Tangram figure/shape</h3>
+
+      <ul class ="w3-ul" >
+        <li>The tangram puzzle offers you a lot of varitions</li>
+        <li>With the technique of the scenes in lesson 9.
+        You can show different variations of your tangram figure.
+        Make it look like part is moving.</li>
+    </ul>
+    <h3>4. Create your favourite animal on the position of your mouse.</h3>
+
+      <ul class ="w3-ul" >
+        <li>Create a canvas as width and height as your screen</li>
+        <li>You can use smart positioning.</li>
+        <li>Use lines, rectangles, ellipses and rectangles.</li>
+    </ul>
 <hr>
 <p>
+
 Please join my class on OpenProcessing to share your Processing sketches.<br/>
 Go to:<a href="https:/www.openprocessing.org/class/55734"> https:/www.openprocessing.org/class/55734</a> and use the code: 30DEEA to join.<br/>
 Or publish an image of your sketch on Facebook page <a href="https://www.facebook.com/creativecodingcourse">https://www.facebook.com/creativecodingcourse</a><br/>
