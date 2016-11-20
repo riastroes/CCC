@@ -301,6 +301,12 @@
           If alpha = 0 then the color is completely transparent, you won't see it.<br/>
           If alpha = 255 the color is completely opaque, there is no transparency.
           In the next example the alpha value is 10. Open this sketch in openprocessing and change the alpha value.
+          <pre>
+color(0,0,255) is (opaque) blue.
+color(0,0,255,10) if alpha is 10 you will get a very  transparent blue.
+color(0,0,255,80) if alpha is 80 you will get a transparent blue.
+color(0,0,255,255) if alpha is 255 you will not get a transparent blue, but an opaque blue.
+</pre>
         </p>
         <h2 class="w3-theme-l2 w3-center w3-xxlarge">No Colors</h2>
         You can hide a part of the shape by setting the alpha value to 0, but is more clear if you use one of the next two functions.
@@ -331,7 +337,7 @@
           p.background(255);
 
           //they need a value, before you can use them.
-          var alpha = 10;
+          var alpha = 10;  //the alpha variable is only used in the setup function.
           color1 = p.color(255,0,0,alpha); //transparent red
           color2 = p.color(0,255,0,alpha); //transparent green
           color3 = p.color(0,0,255,alpha); //transparent blue

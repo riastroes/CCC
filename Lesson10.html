@@ -66,7 +66,7 @@
 
 <div class="w3-row">
   <div class="w3-one " style="padding:16px">
-    <h2 class="w3-theme-l2 w3-center">if</h2>
+    <h2 class="w3-theme-l2 w3-center">The mouse</h2>
 
 </div>
 </div>
@@ -129,12 +129,6 @@
   If you press and release your mousebutton the p5 function mousePressed is called and executed.
   Try this example and you will see the difference.
 </p>
-<div class="w3-row">
-  <div class="w3-one " style="padding:16px">
-    <h2 class="w3-theme-l2 w3-center">if</h2>
-
-</div>
-</div>
 <div class="w3-row  w3-theme-light ">
 <div class="w3-container w3-half">
 <pre>
@@ -148,10 +142,10 @@
     }
   }
   function mousePressed(){
-    p.stroke(255);
-    p.strokeWeight(5);
-    p.noFill();
-    p.ellipse(p.pmouseX, p.pmouseY, 60,60);
+    stroke(255);
+    strokeWeight(5);
+    noFill();
+    ellipse(pmouseX, pmouseY, 60,60);
   }
 </pre>
 </div>
@@ -185,6 +179,74 @@
     </div>
     <p>
       <a href="https://www.openprocessing.org/sketch/388133">open sketch in openprocessing</a>
+    </p>
+
+  </div>
+</div>
+</div>
+<p>Also in the next sketch you will see the difference between the use of the boolean mouseIsPressed in
+  the draw function and the function mousePressed.
+  mousePressed is called once, when you press your mouse. the boolean variable mouseIsPressed is checked in every loop of the draw function.</p>
+  <p>Click and hold your mousebutton pressed, click and hold, etc.</p>
+
+<div class="w3-row  w3-theme-light ">
+<div class="w3-container w3-half">
+<pre>
+
+  var x;
+  function setup(){
+    createCanvas(400, 400);
+    x = 0;
+  }
+  function draw() {
+    if(mouseIsPressed){
+      ellipse(x,200, 50,50);
+    }
+    if(x > p.width){ x = 0;}
+    x += 1;
+  }
+  function mousePressed(){
+    stroke(255);
+    strokeWeight(5);
+    noFill();
+    ellipse(x,100, 100,100);
+  }
+</pre>
+</div>
+<div class="w3-half w3-container">
+  <div class="w3-example">
+    <br/>
+    <div id="divcanvas5">
+      <script>
+      var s5 = function( p ) {
+      var x;
+      p.setup = function() {
+        var canvas = p.createCanvas(400,400);
+        canvas.parent("divcanvas5");
+        p.background(0);
+        x = 0;
+
+      }
+     p.draw = function() {
+       if(p.mouseIsPressed){
+         p.ellipse(x,200,50,50);
+       }
+       if(x > p.width){ x = 0;}
+       x += 1;
+     }
+     p.mousePressed = function(){
+       p.stroke(255);
+       p.strokeWeight(5);
+       p.noFill();
+       p.ellipse(x,100,100,100);
+     }
+
+    };
+      var my1 = new p5(s5, 'c1');
+      </script>
+    </div>
+    <p>
+      <a href="https://www.openprocessing.org/sketch/390014">open sketch in openprocessing</a>
     </p>
 
   </div>
@@ -252,7 +314,7 @@ You can define your own booleans as variables.
       <li>Use a brushCounter. Everytime you click on your mouse add one to your brushCounter.</li>
       <li>If you clicked 5 times, reset your brushCounter to 0 (brushCounter = 0)</li>
       <li>In the draw function check the value of the brushCounter and use the right brush.</li>
-      <li>Don't forget to publish an image of the result. I lOVE ART</li>
+      <li>Don't forget to publish an image of the result. I LOVE ART</li>
 
     </ul>
 <hr>

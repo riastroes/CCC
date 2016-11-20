@@ -40,7 +40,7 @@
       <br/>
     <p>
     If you create a canvas with windowWidth and windowHeight params. Your sketch will look different on different devices.
-    Of course it's nice to have a sketch as width as your screen and may be as height as your screen,
+    Of course it's nice to have a sketch as width as your screen and maybe as height as your screen,
     but now you don't know where the center of sketch is and how big the shapes should be in your drawing.
     So it's a choise depending on your plan with a sketch. For now if you are just sketching for fun and for learning purpose it is
     nice to create a sketch with windowWidth and windowHeight params in your createCanvas function and you have to use relative or smart positioning.
@@ -51,11 +51,12 @@
     <ul class="w3-ul">
       <li><h2>You will learn</h2></li>
       <li>relative position</li>
+      <li>windowResize</li>
+      <li>resizeCanvas</li>
       <li>mouseX, mouseY</li>
       <li>width</li>
       <li>height</li>
       <li>center</li>
-
   </ul>
   </div>
 </div>
@@ -87,7 +88,119 @@
       (width/4, 100);
       (width/4 * 3, 100);
       (0, height/3);
+      etc.
     </pre>
+    <p>
+      If you use windowWidth and windowHeight and start your sketch in a browser. The browser doesn't have allways the right size and
+      you want to adjust the size of your browser. This p5 function will adjust your sketch to the right size.
+      Just add this function to your sketch and p5 will call this function as an user
+      is changing the browser.
+      <pre>
+        function setup(){
+          createCanvas(windowWidth, windowHeight);
+          ...
+        }
+        function draw(){
+          ...
+        }
+        function windowResize(){
+          resizeCanvas();
+        }
+      </pre>
+    </p>
+    <div class="w3-row  w3-theme-light ">
+    <div class="w3-container w3-half">
+    <pre>
+
+//declarations
+var centerX, centerY;
+var size;
+var acolor, bcolor, ccolor;
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  background(100);
+
+  //initializations
+  centerX = width/2;
+  centerY = height/2;
+
+  acolor = color( 50, 150, 50, 10);
+  bcolor = color( 50, 10, 250, 10);
+  ccolor = acolor;
+
+  size = 0;
+
+}
+
+function draw() {
+  fill(ccolor);
+  noStroke();
+  ellipse(centerX, centerY, size, size);
+  size += 1;
+  if(size > height){
+    size = 0;
+    if(ccolor == acolor){ //switch colors
+      ccolor = bcolor;
+    }
+    else{
+      ccolor = acolor;
+    }
+  }
+}
+    </pre>
+    </div>
+    <div class="w3-half w3-container">
+      <div class="w3-example">
+        <br/>
+        <div id="divcanvas">
+          <script>
+          var s1 = function( p ) {
+
+            var centerX, centerY;
+            var size;
+            var acolor, bcolor, ccolor;
+
+          p.setup = function() {
+            var canvas = p.createCanvas(400,400);
+            canvas.parent("divcanvas");
+
+            p.background(100);
+
+            centerX = p.width/2;
+            centerY = p.height/2;
+
+            acolor = p.color( 50, 150, 50, 10);
+            bcolor = p.color( 50, 10, 250, 10);
+            ccolor = acolor;
+
+            size = 0;
+          }
+          p.draw = function() {
+            p.fill(ccolor);
+            p.noStroke();
+            p.ellipse(centerX, centerY, size, size);
+            size += 1;
+            if(size > p.height){
+              size = 0;
+              if(ccolor == acolor){  //switch color
+                ccolor = bcolor;
+              }
+              else{
+                ccolor = acolor;
+              }
+            }
+         }
+        };
+          var my1 = new p5(s1, 'c1');
+          </script>
+        </div>
+        <p>
+          <a href="https://www.openprocessing.org/sketch/389989">open sketch in openprocessing</a>
+        </p>
+
+      </div>
+    </div>
+    </div>
     <p>The same for your mousepointer position.
       <pre>
         mouseX + 10 is 10 pixels to the right of your current mousepointer position.
@@ -96,6 +209,71 @@
         mouseX - 100 is 100 pixels hight then your current mousepointer position.
         etc.
       </pre>
+
+      <div class="w3-row  w3-theme-light ">
+      <div class="w3-container w3-half">
+      <pre>
+
+    //declarations
+    var acolor;
+
+    function setup() {
+    createCanvas(windowWidth, windowHeight);
+    background(100);
+
+    //initializations
+    acolor = color( 250, 150, 50, 20);
+
+    }
+
+    function draw() {
+      fill(acolor);
+      stroke(0);
+      //indent and outline will make your code better readable.
+      triangle(mouseX,    mouseY-20, mouseX-20, mouseY-40, mouseX+20, mouseY-40);
+      triangle(mouseX-20, mouseY,    mouseX-40, mouseY-20, mouseX-40, mouseY+20);
+      triangle(mouseX,    mouseY+20, mouseX-20, mouseY+40, mouseX+20, mouseY+40);
+      triangle(mouseX+20, mouseY,    mouseX+40, mouseY+20, mouseX+40, mouseY-20);
+
+    }
+      </pre>
+      </div>
+      <div class="w3-half w3-container">
+        <div class="w3-example">
+          <br/>
+          <div id="divcanvas2">
+            <script>
+            var s2 = function( p ) {
+
+              var acolor;
+            p.setup = function() {
+              var canvas = p.createCanvas(400,400);
+              canvas.parent("divcanvas2");
+
+              p.background(100);
+              acolor = p.color( 250, 150, 50, 20);
+
+            }
+            p.draw = function() {
+              p.fill(acolor);
+              p.stroke(0);
+              p.triangle(p.mouseX, p.mouseY -20, p.mouseX - 20, p.mouseY-40, p.mouseX+20, p.mouseY-40);
+              p.triangle(p.mouseX-20, p.mouseY, p.mouseX-40, p.mouseY-20, p.mouseX-40, p.mouseY+20);
+              p.triangle(p.mouseX, p.mouseY+20, p.mouseX-20, p.mouseY+40, p.mouseX+20, p.mouseY+40);
+              p.triangle(p.mouseX+20, p.mouseY, p.mouseX+40, p.mouseY+20, p.mouseX+40, p.mouseY-20);
+
+           }
+          };
+            var my1 = new p5(s2, 'c1');
+            </script>
+          </div>
+          <p>
+            <a href="https://www.openprocessing.org/sketch/389992">open sketch in openprocessing</a>
+          </p>
+
+        </div>
+      </div>
+      </div>
     <p>When you create a figure or shape with several parts. It is smart to use one anchor point and all the other positions are relative to this achor,
       so when you move the anchor, all the other points will move.
       Let's say your anchor is stored in the variables x and y.
@@ -108,10 +286,111 @@
         etc.
       </pre>
       <p>The assignments let you practice these techniques.</p>
+      <div class="w3-row  w3-theme-light ">
+      <div class="w3-container w3-half">
+      <pre>
+
+    //declarations
+    var acolor, bcolor, ccolor;
+    var x,y;
+
+    function setup() {
+    createCanvas(windowWidth, windowHeight);
+
+    //initializations
+    acolor = color( 0, 255, 255);
+    bcolor = color( 0, 155, 255);
+    ccolor = color( 0, 55, 255);
+
+    x = 0;
+    y = 200;
+
+    }
+
+    function draw() {
+      background(255);
+
+      fill(acolor);
+      stroke(0);
+      rect(x, y, 100,100);
+
+      fill(bcolor);
+      stroke(0);
+      ellipse(x + 50, y - 50, 100,100);
+
+      fill(ccolor);
+      stroke(0);
+      triangle(x + 50, y - 150, x, y - 100, x + 100, y - 100);
+
+      if(x < width) {
+        x += 1;
+      }
+      else{
+        x = 0;
+      }
+    }
+      </pre>
+      </div>
+      <div class="w3-half w3-container">
+        <div class="w3-example">
+          <br/>
+          <div id="divcanvas3">
+            <script>
+            var s3 = function( p ) {
+              var acolor, bcolor, ccolor;
+              var x,y;
+            p.setup = function() {
+              var canvas = p.createCanvas(400,400);
+              canvas.parent("divcanvas3");
+
+
+              //initializations
+              acolor = p.color( 0, 255, 255);
+              bcolor = p.color( 0, 155, 255);
+              ccolor = p.color( 0, 55, 255);
+
+              x = 0;
+              y = 200;
+
+            }
+            p.draw = function() {
+              p.background(255);
+
+              p.fill(acolor);
+              p.stroke(0);
+              p.rect(x, y, 100,100);
+
+              p.fill(bcolor);
+              p.stroke(0);
+              p.ellipse(x + 50, y - 50, 100,100);
+
+              p.fill(ccolor);
+              p.stroke(0);
+              p.triangle(x + 50, y - 150, x, y - 100, x + 100, y - 100);
+              if(x < p.width) {
+                x += 1;
+              }
+              else{
+                x = 0;
+              }
+            }
+
+          };
+            var my1 = new p5(s3, 'c1');
+            </script>
+          </div>
+          <p>
+            <a href="https://www.openprocessing.org/sketch/389996">open sketch in openprocessing</a>
+          </p>
+
+        </div>
+      </div>
+      </div>
   </div>
   </div>
 
 </div>
+
 
   <div class="w3-row">
       <div class="w3-one " style="padding:16px">
@@ -142,12 +421,12 @@
         <li>The tangram puzzle offers you a lot of varitions</li>
         <li>With the technique of the scenes in lesson 9.
         You can show different variations of your tangram figure.
-        Make it look like part is moving.</li>
+        Make it look like a part is moving.</li>
     </ul>
     <h3>4. Create your favourite animal on the position of your mouse.</h3>
 
       <ul class ="w3-ul" >
-        <li>Create a canvas as width and height as your screen</li>
+        <li>Create a canvas as width and height as your screen.</li>
         <li>You can use smart positioning.</li>
         <li>Use lines, rectangles, ellipses and rectangles.</li>
     </ul>
