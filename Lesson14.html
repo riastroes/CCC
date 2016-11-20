@@ -42,9 +42,10 @@ a<!DOCTYPE html>
       but you can use several fonts. There are web safe fonts.
       Fonts that look the same on different displays.<br/>
       On the site of w3schools there is a list of web safe fonts.
-      Your browser has several fonts available, but every browser is different.
-      If a font is not loading, you need an external font. You can load many free fonts
-      from the website
+      <a href="http://www.w3schools.com/fonts.aspx" >w3schools.com</a>
+      Your browser does have the web safe fonts available.
+          .
+
 
         <h2 class="w3-theme-l2 w3-center">Fonts</h2>
     </p>
@@ -64,61 +65,41 @@ a<!DOCTYPE html>
     </ul>
   </div>
 </div>
-<div class="w3-row">
-  <div class="w3-one w3-container">
-    <div class="w3-container">
-
-
-      <link rel="stylesheet" type="text/css"
-          href="https://fonts.googleapis.com/css?family=Tangerine">
-<p>The text function displays a text on the canvas. <br/>
-  Before you can display any text you have to prepare some tools.
-  <pre>
-    fill(0)
-    textSize(size);       //fill in the size of the text.
-    text("sometext", 30, 100);
-  </pre>
-These functions will display "sometext"  in black in a default (standard) font, with a fontsize of 30 pixels.
-The smalles size for a character is 6 pixels.
-</p>
-<p>
-Allways when you want to use letters, words or phrases, you have to place them between quotes.
-<pre>
-"a" or 'a'
-"word" or 'word'
-"This is a phrase." or 'This is a phrase.'
-</pre>
-In javascript this is called a string.
-For the special characters and signs that are not on you keyboard or are reserved by html,
-you have to use HTML entities. You can find a reference of HTML entities at
-<a href = "http://www.w3schools.com/html/html_entities.asp" >www.w3schools.com</a>.
-
-The next example will only play/..................................
-</p>
-</div>
-</div>
-</div>
 <div class="w3-row  w3-theme-light ">
     <div class="w3-container w3-half">
-    <pre>
-var fontDancing;
-function preload() {
-   fontDancing = loadFont("DancingScript-Regular.ttf");
-}
-function setup() {
-  createCanvas(windowWidth, windowHeight);
-  background(100);
-  textFont(fontDancing);
-  textSize(70);
-  textAlign(CENTER);
+<pre>
+  function setup() {
+    createCanvas(400,600);
+    textSize(14);
+    fill(0)
+    noStroke();
 
-  fill(255);
-}
+  }
 
 function draw() {
-  text("The name of this font is DancingScript-Regular.",width/2, height/2);
+if(frameCount == 1);
+    text("Hello in Default, this is how I look like.", 10,50);
+    textFont("Verdana");
+    text("Hello in Verdana, this is how I look like.", 10,100);
+    textFont("Tahoma");
+    text("Hello in Tahoma, this is how I look like.", 10,150);
+    textFont("Georgia");
+    text("Hello in Georgia, this is how I look like.", 10,200);
+    textFont("Sans Serif");
+    text("Hello in San Serif, this is how I look like.", 10,250);
+    textFont("Comic Sans MS");
+    text("Hello in Comic San MS, this is how I look like.", 10,300);
+    textFont("Palatino Linotype");
+    text("Hello in Palatino Linotype, this is how I look like.", 10,350);
+    textFont("Times New Roman");
+    text("Hello in Times New Roman, this is how I look like.", 10,400);
+    textFont("Arial");
+    text("Hello in Arial, this is how I look like.", 10,450);
+    textFont("Impact");
+    text("Hello in Impact, this is how I look like.", 10,500);
+  }
 }
-    </pre>
+</pre>
     </div>
     <div class="w3-half w3-container">
       <div class="w3-example">
@@ -126,30 +107,200 @@ function draw() {
         <div id="divcanvas0">
           <script>
           var s0 = function( p ) {
-          var fontDancing;
-          p.preload = function() {
-             fontDancing = p.loadFont("resources/DancingScript-Regular.ttf");
-          }
+
           p.setup = function() {
-            var canvas = p.createCanvas(400,400);
+            var canvas = p.createCanvas(400,600);
             canvas.parent("divcanvas0");
-            p.background(100);
-            p.textFont(fontDancing);
-            p.textSize(70);
-            p.textAlign(p.CENTER);
-
-
+            p.textSize(14);
+            p.fill(0)
+            p.noStroke();
           }
           p.draw = function() {
-            p.fill(255);
-            p.text("The name of this font is DancingScript-Regular.",p.width/2, p.height/2);
+            if(p.frameCount == 1){
+            p.text("Hello in Default, this is how I look like.", 10,50);
+            p.textFont("Verdana");
+            p.text("Hello in Verdana, this is how I look like.", 10,100);
+            p.textFont("Tahoma");
+            p.text("Hello in Tahoma, this is how I look like.", 10,150);
+            p.textFont("Georgia");
+            p.text("Hello in Georgia, this is how I look like.", 10,200);
+            p.textFont("Sans Serif");
+            p.text("Hello in San Serif, this is how I look like.", 10,250);
+            p.textFont("Comic Sans MS");
+            p.text("Hello in Comic San MS, this is how I look like.", 10,300);
+            p.textFont("Palatino Linotype");
+            p.text("Hello in Palatino Linotype, this is how I look like.", 10,350);
+            p.textFont("Times New Roman");
+            p.text("Hello in Times New Roman, this is how I look like.", 10,400);
+            p.textFont("Arial");
+            p.text("Hello in Arial, this is how I look like.", 10,450);
+            p.textFont("Impact");
+            p.text("Hello in Impact, this is how I look like.", 10,500);
+          }
           }
         };
           var my1 = new p5(s0, 'c1');
           </script>
         </div>
         <p>
-          <a href="https://www.openprocessing.org/sketch/390437">open sketch in openprocessing</a>
+          <a href="https://www.openprocessing.org/sketch/390466">open sketch in openprocessing</a>
+        </p>
+
+      </div>
+    </div>
+    </div>
+    <div class="w3-row">
+        <div class="w3-container w3-one">
+          If you draw text in every loop it will get very dirty.  Don't forget to place inside a conditional.
+          <pre>
+            if(frameCount == 1){
+              //text
+            }
+          </pre>
+          An other solution is to refresh your background.
+          <pre>
+            background(255);
+            //text
+          </pre>
+    </div>
+  </div>
+    <div class="w3-row  w3-theme-light ">
+        <div class="w3-container w3-half">
+    <pre>
+//THIS IS A BAD EXAMPLE
+
+function setup() {
+  createCanvas(400,400);
+  textSize(14);
+  fill(0)
+  noStroke();
+}
+
+function draw() {
+
+  text("Hello in Default, this is NOT how I look like.", 10,50);
+  textFont("Verdana");
+  text("Hello in Verdana, this is NOT how I look like.", 10,100);
+  textFont("Tahoma");
+  text("Hello in Tahoma, this is NOT how I look like.", 10,150);
+  textFont("Georgia");
+  text("Hello in Georgia, this is NOT how I look like.", 10,200);
+
+}
+    </pre>
+        </div>
+        <div class="w3-half w3-container">
+          <div class="w3-example">
+            <br/>
+            <div id="divcanvas1">
+              <script>
+              var s1 = function( p ) {
+
+              p.setup = function() {
+                var canvas = p.createCanvas(400,400);
+                canvas.parent("divcanvas1");
+                p.textSize(14);
+                p.fill(0)
+                p.noStroke();
+              }
+              p.draw = function() {
+
+                p.text("Hello in Default, this is NOT how I look like.", 10,50);
+                p.textFont("Verdana");
+                p.text("Hello in Verdana, this is NOT how I look like.", 10,100);
+                p.textFont("Tahoma");
+                p.text("Hello in Tahoma, this is NOT how I look like.", 10,150);
+                p.textFont("Georgia");
+                p.text("Hello in Georgia, this is NOT how I look like.", 10,200);
+                }
+            };
+              var my1 = new p5(s1, 'c1');
+              </script>
+            </div>
+            <p>
+              <a href="https://www.openprocessing.org/sketch/390467">open sketch in openprocessing</a>
+            </p>
+
+          </div>
+        </div>
+        </div>
+
+<div class="w3-row">
+  <div class="w3-one w3-container">
+    <br/>
+There are many nice fonts. You can find a lot of fonts at the site of <a href="https://fonts.google.com" >Google Fonts</a>.
+Here you can download a fonts.
+In openprocessing you can upload a fonts in the settings menu, tab Files.
+In the p5 editor you can go to the menu View - Show Sketch Folder. Here you can save your font files in a separate folder /fonts.
+Then it is easy to copy them to a new sketch.<br/>
+Now you have to tell p5 that you like to use this awesome font and p5 needs to load this font in memory,
+before p5 is able to use it. You have to this in the preload function of p5.
+<pre>
+  var myAwesomeFont;
+  function preload{
+    //In the p5 editor don't forget to include the pathname of your font folder
+    //p5
+    myAwesomeFont = loadFont("fonts/PrincessSofia-Regular.ttf");
+    //openprocessing
+    myAwesomeFont = loadFont("PrincessSofia-Regular.ttf");
+
+  }
+</pre>
+
+</div>
+</div>
+<div class="w3-row  w3-theme-light ">
+    <div class="w3-container w3-half">
+    <pre>
+var fontNice;
+function preload() {
+   fontNice = loadFont("PrincessSofia-Regular.ttf");
+}
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  background(0);
+  textFont(fontNice);
+  textSize(40);
+  textAlign(CENTER);
+
+  fill(255);
+}
+
+function draw() {
+  text("The name of this font is PrincessSofia-Regular.",0,0, 400,400);
+}
+    </pre>
+    </div>
+    <div class="w3-half w3-container">
+      <div class="w3-example">
+        <br/>
+        <div id="divcanvas2">
+          <script>
+          var s2 = function( p ) {
+          var fontNice;
+          p.preload = function() {
+             fontNice = p.loadFont("resources/PrincessSofia-Regular.ttf");
+          }
+          p.setup = function() {
+            var canvas = p.createCanvas(400,400);
+            canvas.parent("divcanvas2");
+
+
+            p.textSize(40);
+            p.textAlign(p.CENTER);
+            p.textFont(fontNice);
+            p.fill(255);
+}
+          p.draw = function() {
+            p.background(0);
+            p.text("The name of this font is PrincessSofia-Regular.",0,0, 400,400);
+          }
+        };
+          var my1 = new p5(s2, 'c1');
+          </script>
+        </div>
+        <p>
+          <a href="https://www.openprocessing.org/sketch/390468">open sketch in openprocessing</a>
         </p>
 
       </div>
@@ -160,30 +311,19 @@ function draw() {
   <div class="w3-row">
       <div class="w3-one " style="padding:16px">
   <h1  class="w3-theme-l2 w3-center w3-jumbo">Assignments</h1>
-  <h3>1. Create a scrolling text.</h3>
+  <h3>1. Write a poem about a circle.</h3>
 
   <ul class ="w3-ul" >
-      <li>The text can scroll from top to bottom or from left to right.</li>
+      <li>Are do you prefer the triangle.</li>
+      <li>Use a matching font.</li>
+      <li>This poem also needs an illustration.</li>
   </ul>
-  <h3>2. Design a poster for your tangram puzzle</h3>
+  <h3>1. Create an signature.</h3>
 
   <ul class ="w3-ul" >
-      <li>Use the sketch you created in lesson 11</li>
+      <li>Use a font you like.</li>
+      <li>Sign your sketch.</li>
   </ul>
-  <h3>3. Design a poster for this Creative Coding Course for Beginners.</h3>
-
-  <ul class ="w3-ul" >
-      <li>First make a sketch on graph-paper</li>
-  </ul>
-  <h3>4. The tower of Babel</h3>
-
-    <ul class ="w3-ul" >
-      <li><img class="w3-image" src="resources/towerofbabel.jpg" alt="Tower of Babel by Pieter Bruegel the Elder"/></li>
-      <li>This story is meant to explain the origin of different languages.</li>
-      <li>Javascript is also a different language.</li>
-      <li>What is your interpretation of the tower of Babel.</li>
-  </ul>
-
 
 
 <hr>
