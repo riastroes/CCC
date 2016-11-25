@@ -1,4 +1,4 @@
-a<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <title>CCC: Lesson 15</title>
 <META NAME="COPYRIGHT" CONTENT="&copy; Ria Stroes">
@@ -17,11 +17,8 @@ a<!DOCTYPE html>
 </style>
 <body>
   <div w3-include-html="menu.html"></div>
-
 <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
-
 <div class="w3-main" style="margin-left:250px;">
-
 <div id="myTop" class="w3-top w3-container w3-padding-16 w3-theme w3-large">
   <i class="fa fa-bars w3-opennav w3-hide-large w3-xlarge w3-margin-left w3-margin-right" onclick="w3_open()"></i>
   <span id="myIntro" class="w3-hide">Creative Coding Course in P5</span>
@@ -36,120 +33,253 @@ a<!DOCTYPE html>
 
 <div class="w3-row">
   <div class="w3-twothird w3-container">
-    <div class="w3-container">
+
       <br/>
-    <p>One of the strong points of a computer is do some iteration.
-      So of course there is a structure to support this structure.
-        <h2 class="w3-theme-l2 w3-center">for(<i>begin, end, step</i>)</h2>
+    <img class="w3-image" src="resources/herhaling.png" alt="iteration" />
+    <p>One of the strong points of a computer is to do some iteration.
+      So of course there is a function to support this structure. With the for function
+      you can control the iteration.
+      <h2 class="w3-theme-l2 w3-center">for(<i>begin, test, step</i>)</h2>
 
     </p>
-  </div>
+
   </div>
  <div class="w3-third w3-container">
     <ul class="w3-ul">
       <li><h2>You will learn</h2></li>
-      <li>fonts</li>
-      <li>w3schools</li>
-      <li>Web Safe Fonts</li>
-      <li>External fonts</li>
-      <li>index.html</li>
-      <li>link</li>
-
-
+      <li>iteration</li>
+      <li>local variable</li>
+      <li>++</li>
+      <li>--</li>
+      <li>debug</li>
+      <li>println</li>
+      <li>console</li>
     </ul>
   </div>
 </div>
+
+
 <div class="w3-row">
   <div class="w3-one w3-container">
-    <div class="w3-container">
 
-
-      <link rel="stylesheet" type="text/css"
-          href="https://fonts.googleapis.com/css?family=Tangerine">
-<p>The text function displays a text on the canvas. <br/>
-  Before you can display any text you have to prepare some tools.
-  <pre>
-    fill(0)
-    textSize(size);       //fill in the size of the text.
-    text("sometext", 30, 100);
-  </pre>
-These functions will display "sometext"  in black in a default (standard) font, with a fontsize of 30 pixels.
-The smalles size for a character is 6 pixels.
-</p>
-<p>
-Allways when you want to use letters, words or phrases, you have to place them between quotes.
 <pre>
-"a" or 'a'
-"word" or 'word'
-"This is a phrase." or 'This is a phrase.'
+  for(var i = 0; i < 4; i++){
+    //do something
+  }
 </pre>
-In javascript this is called a string.
-For the special characters and signs that are not on you keyboard or are reserved by html,
-you have to use HTML entities. You can find a reference of HTML entities at
-<a href = "http://www.w3schools.com/html/html_entities.asp" >www.w3schools.com</a>.
-
-The next example will only play/..................................
+<p>
+The for function needs 3 special params, they are separated by a semicolon; the first is begin:
 </p>
-</div>
-</div>
+  <pre>
+    var i = 0;
+  </pre>
+  <p>Here we declare and initialize a local variable, this variable is used in this
+  function to count the loops of an iteration.
+  The second param is a test, to check if the end of the interation is not reached.
+  The function for will be executed as long as the test is true.</p>
+  <pre>
+    i < 4
+  </pre>
+  <p>In this case the iteration will go on as long as i is smaller then 4.
+  The third param is the step-size of the counter.</p>
+  <pre>
+    i++  ( is the same as i += 1)
+  </pre>
+  <p>After every loop there will be one added to the counter i.
+  When you construct a for function, you should check if it is possible for i to reach the end.
+  In this case is it possible for i to reach 4. Otherwise your computer will crash!
+
+</p>
+  </div>
 </div>
 <div class="w3-row  w3-theme-light ">
     <div class="w3-container w3-half">
     <pre>
-var fontDancing;
-function preload() {
-   fontDancing = loadFont("DancingScript-Regular.ttf");
-}
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(400,300);
   background(100);
-  textFont(fontDancing);
-  textSize(70);
-  textAlign(CENTER);
-
-  fill(255);
 }
 
 function draw() {
-  text("The name of this font is DancingScript-Regular.",width/2, height/2);
+  stroke(200,255,255);
+  fill(255,255,200);
+  if(frameCount == 1){
+    for(var i = 0; i < 4; i++){
+      ellipse(random(width),random(height), 30,30);
+    }
+  }
 }
-    </pre>
+</pre>
     </div>
     <div class="w3-half w3-container">
       <div class="w3-example">
         <br/>
         <div id="divcanvas0">
           <script>
-          var s0 = function( p ) {
-          var fontDancing;
-          p.preload = function() {
-             fontDancing = p.loadFont("resources/DancingScript-Regular.ttf");
-          }
+          var s1 = function( p ) {
+
           p.setup = function() {
-            var canvas = p.createCanvas(400,400);
+            var canvas = p.createCanvas(400,300);
             canvas.parent("divcanvas0");
             p.background(100);
-            p.textFont(fontDancing);
-            p.textSize(70);
-            p.textAlign(p.CENTER);
-
-
           }
           p.draw = function() {
-            p.fill(255);
-            p.text("The name of this font is DancingScript-Regular.",p.width/2, p.height/2);
-          }
+            p.stroke(200,255,255);
+            p.fill(255,255,200);
+            if(p.frameCount == 1){
+              for(var i = 0; i < 4; i++){
+                p.ellipse(p.random(p.width),p.random(p.height), 30,30);
+              }
+            }
+         }
         };
-          var my1 = new p5(s0, 'c1');
+          var my1 = new p5(s1, 'c1');
           </script>
         </div>
         <p>
-          <a href="https://www.openprocessing.org/sketch/390437">open sketch in openprocessing</a>
+          <a href="https://www.openprocessing.org/sketch/391156">open sketch in openprocessing</a>
         </p>
 
       </div>
     </div>
+</div>
+<div class="w3-row">
+<div class="w3-one w3-container">
+<p>In the for function you can use this counter (i), but don't change this counter it self. (tip)
+i is a local variable, it is declared in a loop of the draw function, so it will only be known during this loop.
+  The param is given to the for function from the draw function. You can check the value of a variable with the println function.
+  The println function will write the stored value in the console.</p>
+</div>
+</div>
+<div class="w3-row  w3-theme-light ">
+    <div class="w3-container w3-half">
+    <pre>
+var x, y;
+function setup() {
+  createCanvas(400,300);
+  background(100);
+  x = 0;
+  y =100;
+}
+
+function draw() {
+  stroke(200,255,255);
+  fill(255,255,200);
+  for(var i = 0; i < 4; i++){
+    x = i * 50;        //i = 0, 1, 2, 3
+    ellipse(x, y, 30,30);
+    rect(x-15,y+15,30,60);
+  }
+  println(i);
+}
+        </pre>
+        </div>
+        <div class="w3-half w3-container">
+          <div class="w3-example">
+            <br/>
+            <div id="divcanvas1">
+              <script>
+              var s2 = function( p ) {
+              var x, y;
+              p.setup = function() {
+                var canvas = p.createCanvas(400,300);
+                canvas.parent("divcanvas1");
+                p.background(100);
+                x = 0;
+                y =100;
+              }
+              p.draw = function() {
+                p.stroke(200,255,255);
+                p.fill(255,255,200);
+                if(p.frameCount == 1){
+                  for(var i = 0; i < 4; i++){
+                    x = i * 50;
+                    p.ellipse(x, y, 30,30);
+                    p.rect(x-15,y+15,30,60);
+                  }
+                }
+             }
+            };
+              var my1 = new p5(s2, 'c1');
+              </script>
+            </div>
+            <p>
+              <a href="https://www.openprocessing.org/sketch/391157">open sketch in openprocessing</a>
+            </p>
+
+          </div>
+        </div>
+</div>
+        <div class="w3-row">
+        <div class="w3-one w3-container">
+        <p>In the for function you can use this counter (i), but don't change this counter it self. (tip)</p>
+        <p>Just an other example. What will the println function write in the console?</p>
+        </div>
+        </div>
+<div class="w3-row  w3-theme-light ">
+<div class="w3-container w3-half">
+<pre>
+var x, y;
+function setup() {
+  createCanvas(400,300);
+  background(100);
+  x = 0;
+  y = 0;
+}
+
+function draw() {
+  for(var x = 0; x < width; x += 50){
+      if(x === 100){
+         fill(255,200,200);
+         ellipse(x,100, 50,50);
+      }
+      noStroke();
+      fill(255,255,200);
+      rect(x,y,20, height);
+      println(x);
+  }
+}
+
+  </pre>
+  </div>
+
+  <div class="w3-half w3-container">
+    <div class="w3-example">
+      <br/>
+      <div id="divcanvas3">
+        <script>
+        var s3 = function( p ) {
+        var x, y;
+        p.setup = function() {
+          var canvas = p.createCanvas(400,300);
+          canvas.parent("divcanvas3");
+          p.background(100);
+          x = 0;
+          y = 0;
+        }
+        p.draw = function() {
+          for(var x = 0; x < p.width; x += 50){
+              if(x === 100){
+               p.fill(255,200,200);
+               p.ellipse(x,100, 50,50);
+              }
+              p.noStroke();
+              p.fill(255,255,200);
+              p.rect(x,y,20, p.height);
+              p.println(x);
+          }
+       }
+      };
+        var my1 = new p5(s3, 'c1');
+        </script>
+      </div>
+      <p>
+        <a href="https://www.openprocessing.org/sketch/391164">open sketch in openprocessing</a>
+      </p>
+
     </div>
+  </div>
+</div>
 
 
   <div class="w3-row">
@@ -191,6 +321,7 @@ It will be an inspiration for other students.<br/>
 If you have any question about this lesson, send me an email <a href="mailto:riastroes@gmail.com?subject:lesson12">riastroes@gmail.com</a></p>
 </p></div>
 </div>
+
 <footer class="w3-container w3-theme-d3 w3-padding-32" style="padding-left:32px">
     <span class="w3-left"><a  href="http://www.riastroes.nl">www.riastroes.nl</a></span><span class="w3-right">copyright &copy; Ria Stroes</span>
 </footer>
