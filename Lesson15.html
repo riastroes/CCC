@@ -1,0 +1,239 @@
+a<!DOCTYPE html>
+<html>
+<title>CCC: Lesson 15</title>
+<META NAME="COPYRIGHT" CONTENT="&copy; Ria Stroes">
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+<META name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-pink.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/addons/p5.dom.min.js" type="text/javascript"></script>
+<script src="http://www.w3schools.com/lib/w3data.js"></script>
+<script src="../mylib/Google.js" type="text/javascript"></script>
+<style>
+.w3-sidenav a {padding:16px;}
+</style>
+<body>
+  <div w3-include-html="menu.html"></div>
+
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
+
+<div class="w3-main" style="margin-left:250px;">
+
+<div id="myTop" class="w3-top w3-container w3-padding-16 w3-theme w3-large">
+  <i class="fa fa-bars w3-opennav w3-hide-large w3-xlarge w3-margin-left w3-margin-right" onclick="w3_open()"></i>
+  <span id="myIntro" class="w3-hide">Creative Coding Course in P5</span>
+</div>
+
+<header class="w3-container w3-theme w3-padding-64" style="padding-left:16px">
+  <h1 class="w3-xxxlarge w3-padding-16">Creative Coding Course</h1>
+  <h2 class="w3-large">Lesson 15: Iteration</h2>
+</header>
+
+<div class="w3-container" >
+
+<div class="w3-row">
+  <div class="w3-twothird w3-container">
+    <div class="w3-container">
+      <br/>
+    <p>One of the strong points of a computer is do some iteration.
+      So of course there is a structure to support this structure.
+        <h2 class="w3-theme-l2 w3-center">for(<i>begin, end, step</i>)</h2>
+
+    </p>
+  </div>
+  </div>
+ <div class="w3-third w3-container">
+    <ul class="w3-ul">
+      <li><h2>You will learn</h2></li>
+      <li>fonts</li>
+      <li>w3schools</li>
+      <li>Web Safe Fonts</li>
+      <li>External fonts</li>
+      <li>index.html</li>
+      <li>link</li>
+
+
+    </ul>
+  </div>
+</div>
+<div class="w3-row">
+  <div class="w3-one w3-container">
+    <div class="w3-container">
+
+
+      <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Tangerine">
+<p>The text function displays a text on the canvas. <br/>
+  Before you can display any text you have to prepare some tools.
+  <pre>
+    fill(0)
+    textSize(size);       //fill in the size of the text.
+    text("sometext", 30, 100);
+  </pre>
+These functions will display "sometext"  in black in a default (standard) font, with a fontsize of 30 pixels.
+The smalles size for a character is 6 pixels.
+</p>
+<p>
+Allways when you want to use letters, words or phrases, you have to place them between quotes.
+<pre>
+"a" or 'a'
+"word" or 'word'
+"This is a phrase." or 'This is a phrase.'
+</pre>
+In javascript this is called a string.
+For the special characters and signs that are not on you keyboard or are reserved by html,
+you have to use HTML entities. You can find a reference of HTML entities at
+<a href = "http://www.w3schools.com/html/html_entities.asp" >www.w3schools.com</a>.
+
+The next example will only play/..................................
+</p>
+</div>
+</div>
+</div>
+<div class="w3-row  w3-theme-light ">
+    <div class="w3-container w3-half">
+    <pre>
+var fontDancing;
+function preload() {
+   fontDancing = loadFont("DancingScript-Regular.ttf");
+}
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  background(100);
+  textFont(fontDancing);
+  textSize(70);
+  textAlign(CENTER);
+
+  fill(255);
+}
+
+function draw() {
+  text("The name of this font is DancingScript-Regular.",width/2, height/2);
+}
+    </pre>
+    </div>
+    <div class="w3-half w3-container">
+      <div class="w3-example">
+        <br/>
+        <div id="divcanvas0">
+          <script>
+          var s0 = function( p ) {
+          var fontDancing;
+          p.preload = function() {
+             fontDancing = p.loadFont("resources/DancingScript-Regular.ttf");
+          }
+          p.setup = function() {
+            var canvas = p.createCanvas(400,400);
+            canvas.parent("divcanvas0");
+            p.background(100);
+            p.textFont(fontDancing);
+            p.textSize(70);
+            p.textAlign(p.CENTER);
+
+
+          }
+          p.draw = function() {
+            p.fill(255);
+            p.text("The name of this font is DancingScript-Regular.",p.width/2, p.height/2);
+          }
+        };
+          var my1 = new p5(s0, 'c1');
+          </script>
+        </div>
+        <p>
+          <a href="https://www.openprocessing.org/sketch/390437">open sketch in openprocessing</a>
+        </p>
+
+      </div>
+    </div>
+    </div>
+
+
+  <div class="w3-row">
+      <div class="w3-one " style="padding:16px">
+  <h1  class="w3-theme-l2 w3-center w3-jumbo">Assignments</h1>
+  <h3>1. Create a scrolling text.</h3>
+
+  <ul class ="w3-ul" >
+      <li>The text can scroll from top to bottom or from left to right.</li>
+  </ul>
+  <h3>2. Design a poster for your tangram puzzle</h3>
+
+  <ul class ="w3-ul" >
+      <li>Use the sketch you created in lesson 11</li>
+  </ul>
+  <h3>3. Design a poster for this Creative Coding Course for Beginners.</h3>
+
+  <ul class ="w3-ul" >
+      <li>First make a sketch on graph-paper</li>
+  </ul>
+  <h3>4. The tower of Babel</h3>
+
+    <ul class ="w3-ul" >
+      <li><img class="w3-image" src="resources/towerofbabel.jpg" alt="Tower of Babel by Pieter Bruegel the Elder"/></li>
+      <li>This story is meant to explain the origin of different languages.</li>
+      <li>Javascript is also a different language.</li>
+      <li>What is your interpretation of the tower of Babel.</li>
+  </ul>
+
+
+
+<hr>
+<p>
+
+Please join my class on OpenProcessing to share your Processing sketches.<br/>
+Go to:<a href="https:/www.openprocessing.org/class/55734"> https:/www.openprocessing.org/class/55734</a> and use the code: 30DEEA to join.<br/>
+Or publish an image of your sketch on Facebook page <a href="https://www.facebook.com/creativecodingcourse">https://www.facebook.com/creativecodingcourse</a><br/>
+It will be an inspiration for other students.<br/>
+If you have any question about this lesson, send me an email <a href="mailto:riastroes@gmail.com?subject:lesson12">riastroes@gmail.com</a></p>
+</p></div>
+</div>
+<footer class="w3-container w3-theme-d3 w3-padding-32" style="padding-left:32px">
+    <span class="w3-left"><a  href="http://www.riastroes.nl">www.riastroes.nl</a></span><span class="w3-right">copyright &copy; Ria Stroes</span>
+</footer>
+</div>
+<script>
+//include HTML
+w3IncludeHTML();
+
+// Open and close the sidenav on medium and small screens
+function w3_open() {
+    document.getElementById("mySidenav").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidenav").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+
+// Change style of top container on scroll
+window.onscroll = function() {myFunction()};
+function myFunction() {
+    if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+        document.getElementById("myTop").classList.add("w3-card-4");
+        document.getElementById("myIntro").classList.add("w3-show-inline-block");
+    } else {
+        document.getElementById("myIntro").classList.remove("w3-show-inline-block");
+        document.getElementById("myTop").classList.remove("w3-card-4");
+    }
+}
+
+// Accordions
+function myAccordion(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+        x.previousElementSibling.className += " w3-theme";
+    } else {
+        x.className = x.className.replace("w3-show", "");
+        x.previousElementSibling.className =
+        x.previousElementSibling.className.replace(" w3-theme", "");
+    }
+}
+</script>
+
+</body>
+</html>
