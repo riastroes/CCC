@@ -31,9 +31,61 @@
 
 <div class="w3-container" >
 
-
-
-
+  <div class="w3-row">
+    <div class="w3-twothird w3-container">
+      <div class="w3-container">
+        <br/>
+      <p>
+        If you want to use an image in a sketch, you have to upload this image to the web.
+        And as well as with fonts you have to do this in the preload function, otherwise your
+        image object will be empty, if the setup function or draw function has to use it.
+        Be aware of the size of your image, if your image is too big, your viewers will be annoyed.
+        There are a lot resize tools on the internet available like <a href="http://picresize.com/" alt="picresize">picresize.com</a>
+        <br/>
+        Online Image editors can help you to make the background of your image transparent.
+        On windows I use paint.net it is a powerfull  Free Image Editor.
+        If you make the background transparent your image can nicely blend into your sketch and width
+        the resize function you can ajust the size of your image to your canvas.
+        <br/>
+        An endless source of images is <a href="https://images.google.com/">Google Images</a>.
+      </p>
+        <h2 class="w3-theme-l2 w3-center">Images</h2>
+        <p>The function image has three params. The first param is the image object,
+          the second and the third is the position on the canvas, where  to set the image.
+          Just like a rectangle the image is set on position x, y with his left-top-corner.
+        </p>
+          <pre>
+            image( img, x, y);
+          </pre>
+          <p>Before you set the image on your canvas, you can ajust the size of the image.
+            A image is an object and an object can have functions or methods and properties.
+            In this case we call the resize function of the image.
+            <pre>
+              img.resize(50,80);
+            </pre>
+            As you can see the function is added to your variable img with a dot in between.
+            the first param is the new width of the image object and the second param is the new height of the param.
+            If you enlarge an image you will lose graphic quality, but is save to make an image smaller.
+            But it is not a good idea to upload very big images, your viewers will have to wait until all the images are loaded,
+            and they don't like that.
+          </p>
+        </div>
+    </div>
+   <div class="w3-third w3-container">
+      <ul class="w3-ul">
+        <li><h2>You will learn</h2></li>
+        <li>preload</li>
+        <li>loadImage</li>
+        <li>image</li>
+        <li>Google Images</li>
+        <li>resize</li>
+        <li>loadFont</li>
+        <li>textSize</li>
+        <li>textAlign</li>
+        <li>textFont</li>
+      </ul>
+    </div>
+  </div>
 
   <div class="w3-row  w3-theme-light ">
       <div class="w3-container w3-half">
@@ -62,12 +114,13 @@
     image(img, mouseX, mouseY);
   }
 
-  //decorate the christmastree with balls by your mouse
+
 
       </pre>
       </div>
       <div class="w3-half w3-container">
         <div class="w3-example">
+          Decorate the christmastree with balls by your mouse
           <br/>
           <div id="divcanvas1">
             <script>
@@ -115,10 +168,8 @@
   }
   function setup() {
     createCanvas(windowWidth, windowHeight);
-    background(100);
+    background(200);
     img.resize(400,400);
-    imageMode(CENTER);
-    rectMode(CENTER);
   }
 
   function draw() {
@@ -167,7 +218,7 @@
         p.setup = function() {
           var canvas = p.createCanvas(400,400);
           canvas.parent("divcanvas3");
-          p.background(100);
+          p.background(200);
           img.resize(400,400);
           p.imageMode(p.CENTER);
           p.rectMode(p.CENTER);
@@ -213,37 +264,105 @@
   </div>
 </div>
 
-  <div class="w3-row">
-  <div class="w3-one w3-container">
-  <p>In the for function you can use this counter (i), but don't change this counter it self. (tip)</p>
+<div class="w3-row  w3-theme-light ">
+<div class="w3-container w3-half">
+<pre>
+  var teapot;
+  var donkey;
+  function preload(){
+    teapot = loadImage("teapot.png");
+    donkey = loadImage("donkey.png");
+  }
+  function setup() {
+    createCanvas(windowWidth, windowHeight);
+    background(200);
+    img.resize(400,400);
+    imageMode(CENTER);
+    rectMode(CENTER);
+  }
+
+  function draw() {
+    image(teapot,width/2,height/2);
+    image(donkey,width/2 + 75,height/2 -95);
+    textSize(20);
+    textAlign(CENTER);
+    fill(0);
+    text("This tea is hot!", width/2, height/2 + 100);
+    noLoop();
+  }
+  </pre>
   </div>
+
+  <div class="w3-half w3-container">
+    <div class="w3-example">
+
+      <br/>
+      <div id="divcanvas4">
+        <script>
+        var s3 = function( p ) {
+        var teapot;
+        var donkey;
+        p.preload = function() {
+          teapot = p.loadImage("resources/teapot.png");
+          donkey = p.loadImage("resources/donkey.png");
+        }
+        p.setup = function() {
+          var canvas = p.createCanvas(400,400);
+          canvas.parent("divcanvas4");
+          p.background(200);
+
+          p.imageMode(p.CENTER);
+          p.rectMode(p.CENTER);
+        }
+        p.draw = function() {
+          p.image(teapot,p.width/2,p.height/2);
+          p.image(donkey,p.width/2 + 70,p.height/2 -85);
+          p.textSize(20);
+          p.textAlign(p.CENTER);
+          p.fill(0);
+          p.text("This tea is hot!", p.width/2, p.height/2 + 100);
+          p.noLoop();
+       }
+      };
+        var my1 = new p5(s3, 'c1');
+        </script>
+      </div>
+      <p>
+        <a href="https://www.openprocessing.org/sketch/394517">open sketch in openprocessing</a>
+      </p>
+
+    </div>
   </div>
+</div>
 
   <div class="w3-row">
       <div class="w3-one " style="padding:16px">
   <h1  class="w3-theme-l2 w3-center w3-jumbo">Assignments</h1>
-  <h3>1. Create a scrolling text.</h3>
+  <h3>1. Create your own head.</h3>
 
   <ul class ="w3-ul" >
-      <li>The text can scroll from top to bottom or from left to right.</li>
+      <li>Make a selfie and upload your image in the preload function.</li>
+      <li>Leave some space above your head.</li>
+      <li>Can you make an animated head.</li>
+      <li>Make a sketch on paper and have fun.</li>
   </ul>
-  <h3>2. Design a poster for your tangram puzzle</h3>
+  <h3>2. Design a Chrismas card or a Birthday card</h3>
 
   <ul class ="w3-ul" >
-      <li>Use the sketch you created in lesson 11</li>
+      <li>Use an image with a transparent background.</li>
   </ul>
-  <h3>3. Design a poster for this Creative Coding Course for Beginners.</h3>
+  <h3>3. Create a pattern with images.</h3>
 
   <ul class ="w3-ul" >
-      <li>First make a sketch on graph-paper</li>
-  </ul>
-  <h3>4. The tower of Babel</h3>
+      <li>In a pattern the distance between the same images is the same.</li>
+      <li>You can use the for function to achieve a regular pattern.</li>
+      <li>Select your images within a theme WINTER</li>
 
-    <ul class ="w3-ul" >
-      <li><img class="w3-image" src="resources/towerofbabel.jpg" alt="Tower of Babel by Pieter Bruegel the Elder"/></li>
-      <li>This story is meant to explain the origin of different languages.</li>
-      <li>Javascript is also a different language.</li>
-      <li>What is your interpretation of the tower of Babel.</li>
+  </ul>
+  <h3>4. A funny combination.</h3>
+
+  <ul class ="w3-ul" >
+      <li>Pick two images and combine them in your sketch.</li>
   </ul>
 
 
