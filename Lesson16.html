@@ -35,29 +35,121 @@
 
 
 
+  <div class="w3-row  w3-theme-light ">
+      <div class="w3-container w3-half">
+      <pre>
 
+  var img;
+  var fontNice;
+
+  function preload() {
+     img = loadImage("christmastree.jpg");
+     fontNice = loadFont("resources/PrincessSofia-Regular.ttf");
+
+  }
+  function setup() {
+    createCanvas(windowWidth, windowHeight);
+    background(255);
+    img.resize(width, height);
+    image(img, 0,50);
+    textFont(fontNice);
+    textAlign(CENTER);
+    textSize(30);
+    text("Merry Christmas", width/2,30)
+
+  }
+  function mousePressed(){
+    image(img, mouseX, mouseY);
+  }
+
+  //decorate the christmastree with balls by your mouse
+
+      </pre>
+      </div>
+      <div class="w3-half w3-container">
+        <div class="w3-example">
+          <br/>
+          <div id="divcanvas1">
+            <script>
+            var s2 = function( p ) {
+            var fontNice;
+            var img;
+            p.preload = function() {
+               fontNice = p.loadFont("resources/PrincessSofia-Regular.ttf");
+               img = p.loadImage("resources/christmastree.jpg");
+            }
+            p.setup = function() {
+              var canvas = p.createCanvas(400,400);
+              canvas.parent("divcanvas1");
+              p.background(255);
+              img.resize(p.width, p.height-50);
+              p.image(img, 0,50);
+              p.textFont(fontNice);
+              p.textAlign(p.CENTER);
+              p.textSize(30);
+              p.text("Merry Christmas", p.width/2,30)
+            }
+
+            p.mousePressed = function() {
+              p.fill(p.random(255), p.random(255), p.random(255));
+              p.ellipse(p.mouseX, p.mouseY, 20,20);
+            }
+          };
+            var my1 = new p5(s2, 'c1');
+            </script>
+          </div>
+          <p>
+            <a href="https://www.openprocessing.org/sketch/390468">open sketch in openprocessing</a>
+          </p>
+
+        </div>
+      </div>
+      </div>
 
 <div class="w3-row  w3-theme-light ">
 <div class="w3-container w3-half">
 <pre>
-var x, y;
-function setup() {
-createCanvas(400,300);
-background(100);
-x = 0;
-y =100;
-}
+  var img;
+  function preload(){
+    img = loadImage("ria.png");
+  }
+  function setup() {
+    createCanvas(windowWidth, windowHeight);
+    background(100);
+    img.resize(400,400);
+    imageMode(CENTER);
+    rectMode(CENTER);
+  }
 
-function draw() {
-stroke(200,255,255);
-fill(255,255,200);
-for(var i = 0; i < 4; i++){
-x = i * 50;        //i = 0, 1, 2, 3
-ellipse(x, y, 30,30);
-rect(x-15,y+15,30,60);
-}
-println(i);
-}
+  function draw() {
+
+    image(img,width/2,height/2);
+    stroke(90, 0, 23);
+    strokeWeight(10);
+    fill(48, 70, 102)
+    ellipse(width/2, 100,400,100);
+
+    fill(140, 70, 106);
+    rect(width/2,70,200,70);
+    noStroke();
+    ellipse(width/2, 100,190,50);
+    strokeWeight(10);
+    stroke(90, 0, 23);
+    fill(48, 70, 102);
+    ellipse(width/2, 35,200,50);
+
+    strokeWeight(8);
+    stroke(90, 0, 23)
+    fill(48, 70, 102);
+    ellipse((width/2) +  80, 80, 100,100);
+    strokeWeight(4);
+    stroke(140, 70, 106);
+    fill(116, 4, 38);
+    ellipse((width/2) +  110, 100, 100,100);
+    ellipse((width/2) +  90, 110, 50,50);
+    ellipse((width/2) +  80, 150, 30,30);
+    ellipse((width/2) +  100, 170, 30,30);
+  }
   </pre>
   </div>
 
@@ -68,22 +160,45 @@ println(i);
       <div id="divcanvas3">
         <script>
         var s3 = function( p ) {
-        var x, y;
+        var img;
+        p.preload = function() {
+          img = p.loadImage("resources/ria.png");
+        }
         p.setup = function() {
-          var canvas = p.createCanvas(400,300);
+          var canvas = p.createCanvas(400,400);
           canvas.parent("divcanvas3");
           p.background(100);
-          x = 0;
-          y = 0;
+          img.resize(400,400);
+          p.imageMode(p.CENTER);
+          p.rectMode(p.CENTER);
         }
         p.draw = function() {
-          p.noStroke();
-          p.fill(255,255,200);
+          p.image(img,p.width/2,p.height/2);
+          p.stroke(90, 0, 23);
+          p.strokeWeight(10);
+          p.fill(48, 70, 102)
+          p.ellipse(p.width/2, 100,400,100);
 
-          for(var x = 0; x < p.width; x += 50){
-              p.rect(x,y, p.height,50);
-              y += 50;
-          }
+          p.fill(140, 70, 106);
+          p.rect(p.width/2,70,200,70);
+          p.noStroke();
+          p.ellipse(p.width/2, 100,190,50);
+          p.strokeWeight(10);
+          p.stroke(90, 0, 23);
+          p.fill(48, 70, 102);
+          p.ellipse(p.width/2, 35,200,50);
+
+          p.strokeWeight(8);
+          p.stroke(90, 0, 23)
+          p.fill(48, 70, 102);
+          p.ellipse((p.width/2) +  80, 80, 100,100);
+          p.strokeWeight(4);
+          p.stroke(140, 70, 106);
+          p.fill(116, 4, 38);
+          p.ellipse((p.width/2) +  110, 100, 100,100);
+          p.ellipse((p.width/2) +  90, 110, 50,50);
+          p.ellipse((p.width/2) +  80, 150, 30,30);
+          p.ellipse((p.width/2) +  100, 170, 30,30);
 
        }
       };
@@ -91,7 +206,7 @@ println(i);
         </script>
       </div>
       <p>
-        <a href="https://www.openprocessing.org/sketch/391157">open sketch in openprocessing</a>
+        <a href="https://www.openprocessing.org/sketch/393491">open sketch in openprocessing</a>
       </p>
 
     </div>
