@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<title>CCC: Lesson 17</title>
+<META NAME="COPYRIGHT" CONTENT="&copy; Ria Stroes">
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+<META name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-pink.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/addons/p5.dom.min.js" type="text/javascript"></script>
+<script src="http://www.w3schools.com/lib/w3data.js"></script>
+<script src="../mylib/Google.js" type="text/javascript"></script>
+<style>
+.w3-sidenav a {padding:16px;}
+</style>
+<body>
+  <div w3-include-html="menu.html"></div>
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
+<div class="w3-main" style="margin-left:250px;">
+<div id="myTop" class="w3-top w3-container w3-padding-16 w3-theme w3-large">
+  <i class="fa fa-bars w3-opennav w3-hide-large w3-xlarge w3-margin-left w3-margin-right" onclick="w3_open()"></i>
+  <span id="myIntro" class="w3-hide">Creative Coding Course in P5</span>
+</div>
+
+<header class="w3-container w3-theme w3-padding-64" style="padding-left:16px">
+  <h1 class="w3-xxxlarge w3-padding-16">Creative Coding Course</h1>
+  <h2 class="w3-large">Lesson 17: Shapes</h2>
+</header>
+
+<div class="w3-container" >
+
+  <div class="w3-row">
+    <div class="w3-twothird w3-container">
+      <div class="w3-container">
+        <br/>
+      <p>
+      After all the geometric shapes like circles, ellipse, squares and triangles, you will learn about creating free shapes.
+      You can define a free shape by drawing a line through some points on the canvas. If you specify more points, your shape will become
+      more detailed.
+      </p>
+        <h2 class="w3-theme-l2 w3-center">Shapes</h2>
+        <p>Shapes are a list of vertexes in between two functions:
+           A vertex is a vectorpoint on a x, y position.
+          <pre>
+            beginShape();
+              vertex(50,100);
+              vertex(80,200);
+              vertex(50,200);
+            endShape(CLOSE);
+          </pre>
+          The CLOSE param in the endShape function will close your drawing with a last line.
+          You can leave this param out.
+          You can set the stroke, the strokeWeight and the fill function for the free shape.
+          <br/><br/>
+          The code in this examples is a little bit to long for displaying her in the lesson,
+          but check it out in openprocessing, follow the link.
+        </p>
+
+        </div>
+    </div>
+   <div class="w3-third w3-container">
+      <ul class="w3-ul">
+        <li><h2>You will learn</h2></li>
+        <li>beginShape</li>
+        <li>endShape</li>
+        <li>vertex</li>
+        <li>vector</li>
+        <li>CLOSE</li>
+        <li>frameRate</li>
+        <li>frameCount</li>
+        <li>modulo %</li>
+
+
+      </ul>
+    </div>
+  </div>
+
+  <div class="w3-row  w3-theme-light ">
+      <div class="w3-container w3-half">
+      <pre>
+
+  var x,y;
+  var u;
+  function setup() {
+    createCanvas(windowWidth, windowHeight);
+    background(0,200,0);
+    u = 1;
+  }
+
+  function draw(){
+    strokeWeight(3);
+    stroke(0);
+    fill(100,0,50);
+    beginShape();
+      vertex(x,y);
+      vertex(x +(3*u),y + (17*u));
+      vertex(x +(5*u),y + (12*u));
+      vertex(x +(4*u),y + (10*u));
+      vertex(x +(1*u),y + (9*u));
+      vertex(x +(4*u),y + (7*u));
+      vertex(x +(2*u),y + (4*u));
+      vertex(x +(5*u),y + (5*u));
+      vertex(x +(7*u),y + (3*u));
+      vertex(x +(9*u),y + (3*u));
+      vertex(x +(12*u),y + (8*u));
+      vertex(x +(10*u),y + (11*u));
+      vertex(x +(8*u),y + (12*u));
+      vertex(x +(6*u),y + (17*u));
+      ...
+
+    endShape();
+
+  }
+
+
+
+
+      </pre>
+      </div>
+      <div class="w3-half w3-container">
+        <div class="w3-example">
+
+          <br/>
+          <div id="divcanvas1">
+            <script>
+            var s2 = function( p ) {
+            var x,y,u;
+
+            p.setup = function() {
+              var canvas = p.createCanvas(400,320);
+              canvas.parent("divcanvas1");
+              p.background(0,200,0);
+              x = 200;
+              y = 0;
+              u =20;
+              p.frameRate(1);
+            }
+
+            p.draw = function() {
+              p.background(0,200,0);
+              p.strokeWeight(3);
+              p.stroke(0);
+              p.fill(200,0,200);
+              p.beginShape();
+                p.vertex(x +(3*u),y + (17*u));
+                p.vertex(x +(5*u),y + (12*u));
+                p.vertex(x +(4*u),y + (10*u));
+                if(p.frameCount % 2 == 0){
+                  p.vertex(x +(1*u),y + (8*u));
+                  p.vertex(x +(4*u),y + (7*u));
+                  p.vertex(x +(2*u),y + (4*u));
+               }
+                else{
+                  p.vertex(x +(1*u),y + (7*u));
+                }
+                p.vertex(x +(5*u),y + (5*u));
+                p.vertex(x +(7*u),y + (3*u));
+                p.vertex(x +(9*u),y + (3*u));
+                p.vertex(x +(12*u),y + (8*u));
+                p.vertex(x +(10*u),y + (11*u));
+                p.vertex(x +(8*u),y + (12*u));
+                p.vertex(x +(6*u),y + (17*u));
+
+                if(p.frameCount % 2 == 0){
+                p.beginContour();
+                  p.vertex(x +(6*u),y + (6*u));
+                  p.vertex(x +(7*u),y + (8*u));
+                  p.vertex(x +(8*u),y + (8*u));
+                  p.vertex(x +(9*u),y + (6*u));
+                  p.vertex(x +(7*u),y + (5*u));
+                p.endContour();
+              }
+              p.endShape(p.CLOSE);
+              p.beginShape();
+                p.vertex(x -(3*u),y + (17*u));
+                p.vertex(x -(5*u),y + (12*u));
+                p.vertex(x -(4*u),y + (10*u));
+                if(p.frameCount % 2 == 1){
+                  p.vertex(x -(1*u),y + (8*u));
+                  p.vertex(x -(4*u),y + (7*u));
+                  p.vertex(x -(2*u),y + (4*u));
+               }
+                else{
+                  p.vertex(x -(1*u),y + (7*u));
+                }
+                p.vertex(x -(5*u),y + (5*u));
+                p.vertex(x -(7*u),y + (3*u));
+                p.vertex(x -(9*u),y + (3*u));
+                p.vertex(x -(12*u),y + (8*u));
+                p.vertex(x -(10*u),y + (11*u));
+                p.vertex(x -(8*u),y + (12*u));
+                p.vertex(x -(6*u),y + (17*u));
+
+                if(p.frameCount % 2 == 1){
+                p.beginContour();
+                  p.vertex(x -(6*u),y + (6*u));
+                  p.vertex(x -(7*u),y + (8*u));
+                  p.vertex(x -(8*u),y + (8*u));
+                  p.vertex(x -(9*u),y + (6*u));
+                  p.vertex(x -(7*u),y + (5*u));
+                p.endContour();
+              }
+              p.endShape(p.CLOSE);
+            }
+          };
+            var my1 = new p5(s2, 'c1');
+            </script>
+          </div>
+          <p>
+            <a href="https://www.openprocessing.org/sketch/394570">open sketch in openprocessing</a>
+          </p>
+
+        </div>
+      </div>
+      </div>
+      <div class="w3-row">
+        <div class="w3-twothird w3-container">
+          <div class="w3-container">
+            <br/>
+          <p>
+          In the example above there is a shape within a shape.  The eye in the bird is created
+          with a beginContour and endContour function. You can use this for inner parts,
+          but remember that you have to change the direction of defining the vertexes on the canvas.
+          If the shape is defined clockwise than you have to use counter-clockwise direction for the
+          vertexes in the contour functions.<br/></br>
+
+          tip:<br/>
+          Because the image is symetric, I only had to type in half the code.
+          I could copy the other bird and only change the sign of the x values.
+          And I made a few changes.
+          </p>
+          <p>
+            These two birdshead are also an example how you can use different scenes in your sketch.
+            The frameCount variable is a counter for the frames in the loop of the draw function.
+            Now I use every second frame to display the open beck and the eye of one bird and the other way
+            around with the second bird.
+            The modulo operator is giving the rest value after devision.
+
+
+<pre>
+  // you say if framecount modulo two is equal to 0
+  if(frameCount % 2 == 0){    // 0 1 0 1 0 1
+  }
+</pre>
+            The result of frameCount % 5 will be 0 1 2 3 4 0 1 2 3 4 0 1 2 3 4 etc.<br/>
+            So the modulo operator can help you to construct an repeating pattern in the loop of the draw function.
+            With the frameRate function you can slow down your sketch.
+          </p>
+        </div>
+      </div>
+    </div>
+<div class="w3-row  w3-theme-light ">
+<div class="w3-container w3-half">
+<pre>
+var rabbit,head,littlehead;
+function preload(){
+  rabbit = loadImage("rabbit.png");
+  head = loadImage("head.png");
+  littlehead = loadImage("littlehead.png");
+
+}
+function setup() {
+  createCanvas(400,400);
+  background(200);
+  imageMode(CENTER);
+  frameRate(1);
+}
+
+function draw() {
+  background(255);
+  if(frameCount % 3 == 0){
+    image(head, 200,250);
+  }
+  else if(frameCount % 3 == 1){
+    image(head, 200,250);
+    image(rabbit, 200,160);
+  }
+  else if(frameCount % 3 == 2){
+
+    image(rabbit, 200,160);
+    image(littlehead, 200,140);
+  }
+}
+  </pre>
+  </div>
+
+  <div class="w3-half w3-container">
+    <div class="w3-example">
+
+      <br/>
+      <div id="divcanvas2">
+        <script>
+        var s2 = function( p ) {
+        var rabbit,head, littlehead;
+        p.preload = function() {
+          rabbit = p.loadImage("resources/rabbit.png");
+          head = p.loadImage("resources/head.png");
+          littlehead = p.loadImage("resources/littlehead.png");
+        }
+        p.setup = function() {
+          var canvas = p.createCanvas(400,400);
+          canvas.parent("divcanvas2");
+          p.background(255);
+          p.imageMode(p.CENTER);
+          p.frameRate(1);
+        }
+        p.draw = function() {
+          p.background(255);
+          if(p.frameCount % 3 == 0){
+            p.image(head, 200,250);
+          }
+          else if(p.frameCount % 3 == 1){
+            p.image(head, 200,250);
+            p.image(rabbit, 200,160);
+          }
+          else if(p.frameCount % 3 == 2){
+
+            p.image(rabbit, 200,160);
+            p.image(littlehead, 200,140);
+          }
+       }
+      };
+        var my1 = new p5(s2, 'c1');
+        </script>
+      </div>
+      <p>
+        <a href="https://www.openprocessing.org/sketch/396208">open sketch in openprocessing</a>
+      </p>
+
+    </div>
+  </div>
+</div>
+
+<div class="w3-row  w3-theme-light ">
+<div class="w3-container w3-half">
+<pre>
+void setup(){
+  createCanvas(400,400);
+  background(200,180,220);
+}
+void draw(){
+  for(var y = 0; y < height; y += 30){
+    for(var x = 0; x < width; x += 50){
+      fill(x,y,255);
+      beginShape();
+        vertex(x,y);
+        vertex(x + 50, y);
+        vertex(x + 40, y + 30);
+        vertex(x + 10, y + 20);
+        vertex(x - 20, y + 10);
+      endShape(CLOSE);
+    }
+  }
+}
+  </pre>
+  </div>
+
+  <div class="w3-half w3-container">
+    <div class="w3-example">
+
+      <br/>
+      <div id="divcanvas3">
+        <script>
+        var s2 = function( p ) {
+        var rabbit,head, littlehead;
+
+        p.setup = function() {
+          var canvas = p.createCanvas(400,400);
+          canvas.parent("divcanvas3");
+          p.background(200,180,220);
+
+        }
+        p.draw = function() {
+          for(var y = 0; y < p.height; y += 30){
+            for(var x = 0; x < p.width; x += 50){
+              p.fill(x,y,255)
+              p.beginShape();
+                p.vertex(x,y);
+                p.vertex(x + 50, y);
+                p.vertex(x +40, y + 30);
+                p.vertex(x + 10, y + 20);
+                p.vertex(x - 20, y + 10);
+              p.endShape(p.CLOSE);
+            }
+          }
+       }
+      };
+        var my1 = new p5(s2, 'c1');
+        </script>
+      </div>
+      <p>
+        <a href="https://www.openprocessing.org/sketch/396293">open sketch in openprocessing</a>
+      </p>
+
+    </div>
+  </div>
+</div>
+
+  <div class="w3-row">
+      <div class="w3-one " style="padding:16px">
+  <h1  class="w3-theme-l2 w3-center w3-jumbo">Assignments</h1>
+  <h3>1. Create your own head.</h3>
+
+  <ul class ="w3-ul" >
+      <li>Make a selfie and upload your image in the preload function.</li>
+      <li>Leave some space above your head.</li>
+      <li>Can you make an animated head.</li>
+      <li>Make a sketch on paper and have fun.</li>
+  </ul>
+  <h3>2. Design a Chrismas card or a Birthday card</h3>
+
+  <ul class ="w3-ul" >
+      <li>Use an image with a transparent background.</li>
+  </ul>
+  <h3>3. Create a pattern with images.</h3>
+
+  <ul class ="w3-ul" >
+      <li>In a pattern the distance between the same images is the same.</li>
+      <li>You can use the for function to achieve a regular pattern.</li>
+      <li>Select your images within a theme WINTER</li>
+
+  </ul>
+  <h3>4. A funny combination.</h3>
+
+  <ul class ="w3-ul" >
+      <li>Pick two images and combine them in your sketch.</li>
+  </ul>
+
+
+
+<hr>
+<p>
+
+Please join my class on OpenProcessing to share your Processing sketches.<br/>
+Go to:<a href="https:/www.openprocessing.org/class/55734"> https:/www.openprocessing.org/class/55734</a> and use the code: 30DEEA to join.<br/>
+Or publish an image of your sketch on Facebook page <a href="https://www.facebook.com/creativecodingcourse">https://www.facebook.com/creativecodingcourse</a><br/>
+It will be an inspiration for other students.<br/>
+If you have any question about this lesson, send me an email <a href="mailto:riastroes@gmail.com?subject:lesson12">riastroes@gmail.com</a></p>
+</p></div>
+</div>
+
+<footer class="w3-container w3-theme-d3 w3-padding-32" style="padding-left:32px">
+    <span class="w3-left"><a  href="http://www.riastroes.nl">www.riastroes.nl</a></span><span class="w3-right">copyright &copy; Ria Stroes</span>
+</footer>
+</div>
+<script>
+//include HTML
+w3IncludeHTML();
+
+// Open and close the sidenav on medium and small screens
+function w3_open() {
+    document.getElementById("mySidenav").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidenav").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+
+// Change style of top container on scroll
+window.onscroll = function() {myFunction()};
+function myFunction() {
+    if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+        document.getElementById("myTop").classList.add("w3-card-4");
+        document.getElementById("myIntro").classList.add("w3-show-inline-block");
+    } else {
+        document.getElementById("myIntro").classList.remove("w3-show-inline-block");
+        document.getElementById("myTop").classList.remove("w3-card-4");
+    }
+}
+
+// Accordions
+function myAccordion(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+        x.previousElementSibling.className += " w3-theme";
+    } else {
+        x.className = x.className.replace("w3-show", "");
+        x.previousElementSibling.className =
+        x.previousElementSibling.className.replace(" w3-theme", "");
+    }
+}
+</script>
+
+</body>
+</html>

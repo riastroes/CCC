@@ -51,7 +51,7 @@
       </p>
         <h2 class="w3-theme-l2 w3-center">Images</h2>
         <p>The function image has three params. The first param is the image object,
-          the second and the third is the position on the canvas, where  to set the image.
+          the second and the third is the position on the canvas, where  to put the image.
           Just like a rectangle the image is set on position x, y with his left-top-corner.
         </p>
           <pre>
@@ -79,10 +79,17 @@
         <li>image</li>
         <li>Google Images</li>
         <li>resize</li>
+        <li>imageMode</li>
+        <li>rectMode</li>
+        <li>CENTER</li>
+        <li>CORNER</li>
+        <li>CORNERS</li>
+        <li>RADIUS</li>
         <li>loadFont</li>
         <li>textSize</li>
         <li>textAlign</li>
         <li>textFont</li>
+
       </ul>
     </div>
   </div>
@@ -111,7 +118,8 @@
 
   }
   function mousePressed(){
-    image(img, mouseX, mouseY);
+    fill(random(255), random(255), random(255));
+    ellipse(mouseX, mouseY, 20,20);
   }
 
 
@@ -129,7 +137,7 @@
             var img;
             p.preload = function() {
                fontNice = p.loadFont("resources/PrincessSofia-Regular.ttf");
-               img = p.loadImage("resources/christmastree.jpg");
+               img = p.loadImage('resources/christmastree.jpg');
             }
             p.setup = function() {
               var canvas = p.createCanvas(400,400);
@@ -152,13 +160,44 @@
             </script>
           </div>
           <p>
-            <a href="https://www.openprocessing.org/sketch/390468">open sketch in openprocessing</a>
+            <a href="https://www.openprocessing.org/sketch/394570">open sketch in openprocessing</a>
           </p>
 
         </div>
       </div>
       </div>
+      <div class="w3-row">
+        <div class="w3-twothird w3-container">
+          <div class="w3-container">
+            <br/>
+          <p>
+            An image and a rectangle are placed on the canvas relative to his left-upper-corner. This is not always convenient and you
+            can change this by adjusting the imageMode and the rectMode.
+            Default the imageMode and rectMode are in these modes:
+            <pre>
+              imageMode(CORNER);
+              rectMode(CORNER);
+            </pre>
+            These are the other options:
+            <pre>
+              imageMode(CENTER);  // this position of x and y are anchored at the center of the image
+              rectMode(CENTER);   // this position of x and y are anchored at the center of the rect
 
+              imageMode(CORNERS);
+            </pre>
+            the first two params of the image function are the upper-left-corner and the second and fourth param are now the bottom-right-corner.
+            imageMode(CORNERS);
+            Rectangle do have another modes:
+            <pre>
+            rectMode(RADIUS);
+           </pre>
+            Now the third and fourth params are half the width and half the height of the rectangle.
+            Do mind the capitals, because javascript is case-sensative. So it will not understand center, corner, etc.
+
+          </p>
+        </div>
+      </div>
+    </div>
 <div class="w3-row  w3-theme-light ">
 <div class="w3-container w3-half">
 <pre>
@@ -167,9 +206,11 @@
     img = loadImage("ria.png");
   }
   function setup() {
-    createCanvas(windowWidth, windowHeight);
+    createCanvas(400,400);
     background(200);
     img.resize(400,400);
+    imageMode(CENTER);
+    rectMode(CENTER);
   }
 
   function draw() {
@@ -274,9 +315,8 @@
     donkey = loadImage("donkey.png");
   }
   function setup() {
-    createCanvas(windowWidth, windowHeight);
+    createCanvas(400,400);
     background(200);
-    img.resize(400,400);
     imageMode(CENTER);
     rectMode(CENTER);
   }
