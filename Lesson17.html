@@ -71,7 +71,8 @@
         <li>frameRate</li>
         <li>frameCount</li>
         <li>modulo %</li>
-
+        <li>pattern</li>
+        <li>nested iterations</li>
 
       </ul>
     </div>
@@ -216,7 +217,7 @@
       </div>
       </div>
       <div class="w3-row">
-        <div class="w3-twothird w3-container">
+        <div class="w3-one w3-container">
           <div class="w3-container">
             <br/>
           <p>
@@ -224,7 +225,19 @@
           with a beginContour and endContour function. You can use this for inner parts,
           but remember that you have to change the direction of defining the vertexes on the canvas.
           If the shape is defined clockwise than you have to use counter-clockwise direction for the
-          vertexes in the contour functions.<br/></br>
+          vertexes in the contour functions.<br/>
+          <pre>
+beginShape()
+  //define clockwise
+  vertex(x,y);
+  ...
+  beginContour()
+    //define counter-clockwise
+    vertex(x,y);
+    ...
+  endContour(CLOSE);
+endShape(CLOSE);
+</pre>
 
           tip:<br/>
           Because the image is symetric, I only had to type in half the code.
@@ -332,15 +345,31 @@ function draw() {
     </div>
   </div>
 </div>
+<div class="w3-row">
+  <div class="w3-one w3-container">
+    <div class="w3-container">
+      <br/>
+      <p>In the next example I created a pattern with two nested iterations.
+        The y is increased by 30 and is iterating from 0 - 400:<br/>
+        <pre>0 30 60 60 120 150 180 210 240 270 300 330 360 390 </pre>
+         If y = 0 then the x is iterating  from 0 - 400, the x is increased by 50:
+        <pre> 0 50 100 150 200 250 300 350 </pre>
+        then y = 30 and again the x is iterating from 0 - 400:
+        <pre> 0 50 100 150 200 250 300 350 </pre>
+        then y = 60 etc.
+        The x and y values are used to generate different colors.
 
+    </div>
+  </div>
+</div>
 <div class="w3-row  w3-theme-light ">
 <div class="w3-container w3-half">
 <pre>
-void setup(){
+function setup(){
   createCanvas(400,400);
   background(200,180,220);
 }
-void draw(){
+function draw(){
   for(var y = 0; y < height; y += 30){
     for(var x = 0; x < width; x += 50){
       fill(x,y,255);
@@ -364,7 +393,6 @@ void draw(){
       <div id="divcanvas3">
         <script>
         var s2 = function( p ) {
-        var rabbit,head, littlehead;
 
         p.setup = function() {
           var canvas = p.createCanvas(400,400);
@@ -397,35 +425,138 @@ void draw(){
     </div>
   </div>
 </div>
+<div class="w3-row">
+  <div class="w3-one w3-container">
+    <div class="w3-container">
+      <br/>
+      <p>This is an example of a one-line-drawing.<br/>
+        Because the first and the last vertexes are fixed, they allways have the same value
+        and the dog can move on the line.</p>
 
+    </div>
+  </div>
+</div>
+<div class="w3-row  w3-theme-light ">
+<div class="w3-container w3-half">
+<pre>
+var x,y;
+function setup(){
+  createCanvas(400,400);
+  stroke(0);
+  noFill();
+  strokeWeight(5);   //use a thick line.
+  x = 0;
+  y = height/2;
+}
+function draw(){
+  background(200,180,220);
+  beginShape();
+    vertex(0,height/2);
+    vertex(x, y);
+    vertex(x, y -100);
+    vertex(x + 5, y -100);
+    ...
+    vertex(x + 10, y -20);
+    vertex(x + 10, y);
+    vertex(x, y);
+    vertex(width,height/2);
+  endShape();
+  //let's move
+  x++;
+  if(x>width){
+    //start over again.
+    x = 0;
+  }
+}
+  </pre>
+  </div>
+
+  <div class="w3-half w3-container">
+    <div class="w3-example">
+
+      <br/>
+      <div id="divcanvas4">
+        <script>
+        var s2 = function( p ) {
+        var x,y;
+        p.setup = function() {
+          var canvas = p.createCanvas(400,400);
+          canvas.parent("divcanvas4");
+
+          p.stroke(0);
+          p.noFill();
+          p.strokeWeight(5);
+          x = 0;
+          y = p.height-50;
+
+        }
+        p.draw = function() {
+          p.background(200,180,220);
+          p.beginShape();
+            p.vertex(0,p.height-50);
+            p.vertex(x, y);
+            p.vertex(x, y -100);
+            p.vertex(x + 5, y -100);
+            p.vertex(x + 5, y -50);
+            p.vertex(x + 40, y -50);
+            p.vertex(x + 50, y -70);
+            p.vertex(x + 55, y -80);
+            p.vertex(x + 53, y -70);
+            p.vertex(x + 60, y -60);
+            p.vertex(x + 70, y -50);
+            p.vertex(x + 60, y -40);
+            p.vertex(x + 55, y -40);
+            p.vertex(x + 55, y );
+            p.vertex(x + 45, y );
+            p.vertex(x + 45, y -20);
+            p.vertex(x + 10, y -20);
+            p.vertex(x + 10, y);
+            p.vertex(x, y);
+            p.vertex(p.width,p.height-50);
+          p.endShape();
+          //let's move
+          x++;
+          if(x>p.width){
+            //start over again.
+            x = 0;
+          }
+       }
+      };
+        var my1 = new p5(s2, 'c1');
+        </script>
+      </div>
+      <p>
+        <a href="https://www.openprocessing.org/sketch/396864">open sketch in openprocessing</a>
+      </p>
+
+    </div>
+  </div>
+</div>
   <div class="w3-row">
       <div class="w3-one " style="padding:16px">
   <h1  class="w3-theme-l2 w3-center w3-jumbo">Assignments</h1>
-  <h3>1. Create your own head.</h3>
-
+  <h3>3. Create a pattern with shapes.</h3>
   <ul class ="w3-ul" >
-      <li>Make a selfie and upload your image in the preload function.</li>
-      <li>Leave some space above your head.</li>
-      <li>Can you make an animated head.</li>
-      <li>Make a sketch on paper and have fun.</li>
+      <li>A pattern with a nested iteration.</li>
+      <li>Create a motif 100  by 100 pixels</li>
+      <li>x and y will increase by 100</li>
+      <li>You can make the shapes smaller or bigger then the motif.</li>
   </ul>
-  <h3>2. Design a Chrismas card or a Birthday card</h3>
+
+  <h3>2. Mixed Media</h3>
 
   <ul class ="w3-ul" >
+      <li>Search an image of an object and draw the surrounding area with shapes.</li>
+      <li>Example 1: Use a photo of your self and create with shapes a landscape, mountain climbing, swimming in the sea, etc.</li>
+      <li>Example 1: Use a photo of a dog and create with shape a monster, that attacks the dog.</li>
       <li>Use an image with a transparent background.</li>
+      <li>Don't forget to make a sketch on paper.</li>
   </ul>
-  <h3>3. Create a pattern with images.</h3>
 
+  <h3>3. One line drawing.</h3>
   <ul class ="w3-ul" >
-      <li>In a pattern the distance between the same images is the same.</li>
-      <li>You can use the for function to achieve a regular pattern.</li>
-      <li>Select your images within a theme WINTER</li>
-
-  </ul>
-  <h3>4. A funny combination.</h3>
-
-  <ul class ="w3-ul" >
-      <li>Pick two images and combine them in your sketch.</li>
+      <li>Create a one-line-drawing</li>
+      <li>First make a sketch on paper!</li>
   </ul>
 
 

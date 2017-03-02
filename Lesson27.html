@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<title>CCC: Lesson 28</title>
+<META NAME="COPYRIGHT" CONTENT="&copy; Ria Stroes">
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+<META name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-pink.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/addons/p5.dom.min.js" type="text/javascript"></script>
+<script src="http://www.w3schools.com/lib/w3data.js"></script>
+<script src="../mylib/Google.js" type="text/javascript"></script>
+<style>
+.w3-sidenav a {padding:16px;}
+</style>
+<body>
+  <div w3-include-html="menu.html"></div>
+
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
+
+<div class="w3-main" style="margin-left:250px;">
+
+<div id="myTop" class="w3-top w3-container w3-padding-16 w3-theme w3-large">
+  <i class="fa fa-bars w3-opennav w3-hide-large w3-xlarge w3-margin-left w3-margin-right" onclick="w3_open()"></i>
+  <span id="myIntro" class="w3-hide">Creative Coding Course in P5</span>
+</div>
+
+<header class="w3-container w3-theme w3-padding-64" style="padding-left:16px">
+  <h1 class="w3-xxxlarge w3-padding-16">Creative Coding Course</h1>
+  <h2 class="w3-large">Lesson 27: EXPORT PDF</h2>
+</header>
+
+<div class="w3-container" >
+
+<div class="w3-row">
+  <div class="w3-twothird w3-container">
+    <div class="w3-container">
+      <br/>
+    <p>
+      Why should you want to export to pdf?
+      PDF is scalable, it is vector-based and not bitmap(dots) based.
+      <br/><br/>
+      If you use a svg renderer for the creation of your canvas your drawing is
+      a vector image and you can export it as svg or as pdf.
+  </div>
+  </div>
+  <div class="w3-third w3-container">
+    <ul class="w3-ul">
+      <li><h2>You will learn</h2></li>
+      <li>include p5.svg library</li>
+      <li>PDF</li>
+      <li>SVG</li>
+      <li>createPDF</li>
+      <li>beginRecord</li>
+      <li>save</li>
+    </ul>
+  </div>
+</div>
+<div class="w3-row">
+  <div class="w3-one w3-container">
+    <div class="w3-container">
+      <br/>
+      <h2 class="w3-theme-l2 w3-center">Export PDF</h2>
+    <p>
+    </p>
+    <pre>
+
+    </pre>
+    <p>
+
+      <pre>
+
+      </pre>
+    </p>
+    <div class="w3-row  w3-theme-light ">
+    <div class="w3-container w3-half">
+    <pre>
+      var pdf;
+
+      function setup() {
+          // If we use SVG Renderer, then the PDF generated will be vector
+          // Note that to use SVG Renderer, you must include p5.svg library
+          createCanvas(600, 200, SVG);
+          pdf = createPDF();
+          pdf.beginRecord();
+      }
+
+      function draw() {
+          background(255);
+          fill('#ED225D');
+          textSize(100);
+          textAlign(CENTER);
+          text(frameCount, width * 0.5, height * 0.5);
+          if (frameCount == 10) {
+              noLoop();
+              pdf.save();
+          }
+      }
+    </pre>
+    </div>
+    <div class="w3-half w3-container">
+      <div class="w3-example">
+        <br/>
+        <div id="divcanvas">
+          <script>
+          var s1 = function( p ) {
+
+          var pdf;
+
+          p.setup = function() {
+            var canvas = p.createCanvas(400,400,SVG);
+            canvas.parent("divcanvas");
+            pdf = p5.createPDF();
+            pdf.beginRecord();
+          }
+          p.draw = function() {
+            p.background(255);
+            p.fill('#ED225D');
+            p.textSize(100);
+            p.textAlign(CENTER);
+            p.text(p.frameCount, p.width * 0.5, p.height * 0.5);
+            if (p.frameCount == 10) {
+                p.noLoop();
+                pdf.save();
+            }
+         }
+        };
+          var my1 = new p5(s1, 'c1');
+          </script>
+        </div>
+        <p>
+          <a href="https://www.openprocessing.org/sketch/389989">open sketch in openprocessing</a>
+        </p>
+
+      </div>
+    </div>
+    </div>
+    <p>
+    </p>
+      <pre>
+
+      </pre>
+
+
+      <div class="w3-row  w3-theme-light ">
+      <div class="w3-container w3-half">
+      <pre>
+
+    //declarations
+
+
+    function setup() {
+    createCanvas(windowWidth, windowHeight);
+
+
+    //initializations
+
+
+    }
+
+    function draw() {
+
+    }
+      </pre>
+      </div>
+      <div class="w3-half w3-container">
+        <div class="w3-example">
+          <br/>
+          <div id="divcanvas2">
+            <script>
+            var s2 = function( p ) {
+
+            p.setup = function() {
+
+            }
+            p.draw = function() {
+
+           }
+          };
+            var my1 = new p5(s2, 'c1');
+            </script>
+          </div>
+          <p>
+            <a href="https://www.openprocessing.org/sketch/389992">open sketch in openprocessing</a>
+          </p>
+
+        </div>
+      </div>
+      </div>
+    <p>
+
+    </p>
+      <div class="w3-row  w3-theme-light ">
+      <div class="w3-container w3-half">
+      <pre>
+
+    //declarations
+
+    function setup() {
+    createCanvas(windowWidth, windowHeight);
+
+    //initializations
+
+    }
+
+    function draw() {
+
+    }
+      </pre>
+      </div>
+      <div class="w3-half w3-container">
+        <div class="w3-example">
+          <br/>
+          <div id="divcanvas3">
+            <script>
+            var s3 = function( p ) {
+
+
+            p.setup = function() {
+              var canvas = p.createCanvas(400,400);
+              canvas.parent("divcanvas3");
+
+
+              //initializations
+
+
+            }
+            p.draw = function() {
+
+            }
+
+          };
+            var my1 = new p5(s3, 'c1');
+            </script>
+          </div>
+          <p>
+            <a href="https://www.openprocessing.org/sketch/">open sketch in openprocessing</a>
+          </p>
+
+        </div>
+      </div>
+      </div>
+  </div>
+  </div>
+
+</div>
+
+
+  <div class="w3-row">
+      <div class="w3-one " style="padding:16px">
+  <h1  class="w3-theme-l2 w3-center w3-jumbo">Assignments</h1>
+
+  <h3>1. Tangram puzzle</h3>
+
+    <ul class ="w3-ul" >
+      <li>You can find some information about a tangram puzzle in wikipedia. (Google search: wiki tangram)</li>
+      <li>Create a canvas as width and height as your screen</li>
+      <li>All the pieces of a tangram puzzle make a rectangle with a size half your screen and a height half your screen.</li>
+      <li>First make a sketch on graph paper. This is so important for all your designs. It will save you a lot of time. :-)</li>
+      <li>Use smart positioning.</li>
+  </ul>
+
+
+
+<hr>
+<p>
+
+Please join my class on OpenProcessing to share your Processing sketches.<br/>
+Go to:<a href="https:/www.openprocessing.org/class/55734"> https:/www.openprocessing.org/class/55734</a> and use the code: 30DEEA to join.<br/>
+Or publish an image of your sketch on Facebook page <a href="https://www.facebook.com/creativecodingcourse">https://www.facebook.com/creativecodingcourse</a><br/>
+It will be an inspiration for other students.<br/>
+If you have any question about this lesson, send me an email <a href="mailto:riastroes@gmail.com?subject:lesson12">riastroes@gmail.com</a></p>
+</p></div>
+</div>
+<footer class="w3-container w3-theme-d3 w3-padding-32" style="padding-left:32px">
+    <span class="w3-left"><a  href="http://www.riastroes.nl">www.riastroes.nl</a></span><span class="w3-right">copyright &copy; Ria Stroes</span>
+</footer>
+</div>
+<script>
+//include HTML
+w3IncludeHTML();
+
+// Open and close the sidenav on medium and small screens
+function w3_open() {
+    document.getElementById("mySidenav").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidenav").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+
+// Change style of top container on scroll
+window.onscroll = function() {myFunction()};
+function myFunction() {
+    if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+        document.getElementById("myTop").classList.add("w3-card-4");
+        document.getElementById("myIntro").classList.add("w3-show-inline-block");
+    } else {
+        document.getElementById("myIntro").classList.remove("w3-show-inline-block");
+        document.getElementById("myTop").classList.remove("w3-card-4");
+    }
+}
+
+// Accordions
+function myAccordion(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+        x.previousElementSibling.className += " w3-theme";
+    } else {
+        x.className = x.className.replace("w3-show", "");
+        x.previousElementSibling.className =
+        x.previousElementSibling.className.replace(" w3-theme", "");
+    }
+}
+</script>
+
+</body>
+</html>
