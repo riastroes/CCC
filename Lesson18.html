@@ -36,9 +36,9 @@
       <div class="w3-container">
         <br/>
       <p>
-      By now your code will grow larger and it's time to learn to organize your code. 
+      By now your code will grow larger and it's time to learn to organize your code.
       A function is a block of code designed to perform a particular task.
-      
+
       </p>
         <h2 class="w3-theme-l2 w3-center">Functions</h2>
         <p>We have seen already a lot of functions, like setup, draw, ellipse, etc.<br/>
@@ -68,24 +68,24 @@
               //save your file with javascript functions as functions.js
               //create a submap 'mylibrary' in the root of your project.
               //insert inside the heading of your index.html:
-             &lt;script&gt; src="mylibrary/myfunctions.js" type="text/javascript">&lt;/script&gt; 
+             &lt;script&gt; src="mylibrary/myfunctions.js" type="text/javascript">&lt;/script&gt;
           </pre>
 
           A function can have a return value.<br/>
           The result of function is stored in a variable<br/>
           For example:<br/>
-         
+
           <pre>
           //definition<br/>
           function sum(a,b){
             //this function will add the values, stored in the two params.
             return a+b;
           }
-          
+
           //call function<br/>
           var c = sum(a,b);<br/>
           </pre>
-          But not all functions have a return value, the setup function and the draw function are examples of functions that execute a specific task, 
+          But not all functions have a return value, the setup function and the draw function are examples of functions that execute a specific task,
           but as you can see, they don't have a return function.<br/>
           The function sum is a very simple function and not so smart, but functions can be very powerfull and can include many lines of codes.<br/>
           <pre>
@@ -93,18 +93,32 @@
           </pre>
 
         </p>
+          Let's create a smart function.<br/>
+          In this function an image will be saved, with my copyright sign on it.<br/>
+          If you want to save a image from your animation, be careful, if you call the save function of p5 in the
+       draw function. It will attempt to save an image in every loop, so that can be 60 times a second.
+      That's why it is smart to build your own safe save function.
+          <pre>
+            p5:
+            save(filename);
+          <pre>
+          <pre>
+
+          </pre>
+            Let's create a function to save an image of your animantion.
+
 
         </div>
     </div>
    <div class="w3-third w3-container">
-     
+
       <ul class="w3-ul">
         <li><h2>You will learn</h2></li>
         <li>Functions</li>
         <li>Parameters</li>
         <li>return</li>
         <li>library</li>
-        
+
 
       </ul>
     </div>
@@ -122,31 +136,23 @@
     u = 1;
   }
 
-  function draw(){
-    strokeWeight(3);
-    stroke(0);
-    fill(100,0,50);
-    beginShape();
-      vertex(x,y);
-      vertex(x +(3*u),y + (17*u));
-      vertex(x +(5*u),y + (12*u));
-      vertex(x +(4*u),y + (10*u));
-      vertex(x +(1*u),y + (9*u));
-      vertex(x +(4*u),y + (7*u));
-      vertex(x +(2*u),y + (4*u));
-      vertex(x +(5*u),y + (5*u));
-      vertex(x +(7*u),y + (3*u));
-      vertex(x +(9*u),y + (3*u));
-      vertex(x +(12*u),y + (8*u));
-      vertex(x +(10*u),y + (11*u));
-      vertex(x +(8*u),y + (12*u));
-      vertex(x +(6*u),y + (17*u));
-      ...
+  function safeSave(filename){
+    if(frameCount % 100 == 0){
+      //filename use frameCount as sequence number.
 
-    endShape();
+      var name = filename  + frameCount + ".png";
 
+      //copyright in the right-bottom-corner.
+      fill(0);
+      text("©riastroes2017", width-100, height-20);
+        save(filename);
+      }
   }
-
+  function draw(){
+        fill(random(255);
+        ellipse(mouseX, mouseY, 100);
+        safeSave("animation");
+      }
 
 
 
@@ -168,76 +174,29 @@
               x = 200;
               y = 0;
               u =20;
-              p.frameRate(1);
+
             }
 
             p.draw = function() {
-              p.background(0,200,0);
-              p.strokeWeight(3);
-              p.stroke(0);
-              p.fill(200,0,200);
-              p.beginShape();
-                p.vertex(x +(3*u),y + (17*u));
-                p.vertex(x +(5*u),y + (12*u));
-                p.vertex(x +(4*u),y + (10*u));
-                if(p.frameCount % 2 == 0){
-                  p.vertex(x +(1*u),y + (8*u));
-                  p.vertex(x +(4*u),y + (7*u));
-                  p.vertex(x +(2*u),y + (4*u));
-               }
-                else{
-                  p.vertex(x +(1*u),y + (7*u));
-                }
-                p.vertex(x +(5*u),y + (5*u));
-                p.vertex(x +(7*u),y + (3*u));
-                p.vertex(x +(9*u),y + (3*u));
-                p.vertex(x +(12*u),y + (8*u));
-                p.vertex(x +(10*u),y + (11*u));
-                p.vertex(x +(8*u),y + (12*u));
-                p.vertex(x +(6*u),y + (17*u));
-
-                if(p.frameCount % 2 == 0){
-                p.beginContour();
-                  p.vertex(x +(6*u),y + (6*u));
-                  p.vertex(x +(7*u),y + (8*u));
-                  p.vertex(x +(8*u),y + (8*u));
-                  p.vertex(x +(9*u),y + (6*u));
-                  p.vertex(x +(7*u),y + (5*u));
-                p.endContour();
-              }
-              p.endShape(p.CLOSE);
-              p.beginShape();
-                p.vertex(x -(3*u),y + (17*u));
-                p.vertex(x -(5*u),y + (12*u));
-                p.vertex(x -(4*u),y + (10*u));
-                if(p.frameCount % 2 == 1){
-                  p.vertex(x -(1*u),y + (8*u));
-                  p.vertex(x -(4*u),y + (7*u));
-                  p.vertex(x -(2*u),y + (4*u));
-               }
-                else{
-                  p.vertex(x -(1*u),y + (7*u));
-                }
-                p.vertex(x -(5*u),y + (5*u));
-                p.vertex(x -(7*u),y + (3*u));
-                p.vertex(x -(9*u),y + (3*u));
-                p.vertex(x -(12*u),y + (8*u));
-                p.vertex(x -(10*u),y + (11*u));
-                p.vertex(x -(8*u),y + (12*u));
-                p.vertex(x -(6*u),y + (17*u));
-
-                if(p.frameCount % 2 == 1){
-                p.beginContour();
-                  p.vertex(x -(6*u),y + (6*u));
-                  p.vertex(x -(7*u),y + (8*u));
-                  p.vertex(x -(8*u),y + (8*u));
-                  p.vertex(x -(9*u),y + (6*u));
-                  p.vertex(x -(7*u),y + (5*u));
-                p.endContour();
-              }
-              p.endShape(p.CLOSE);
+              p.fill(p.random(255);
+              p.ellipse(p.mouseX, p.mouseY, 100);
+              p.safeSave("animation");
             }
           };
+
+            p.safeSave = function(filename) {
+
+              if(p.frameCount % 100 == 0){
+                //filename use frameCount as sequence number.
+
+                var name = filename  + frameCount + ".png";
+
+                //copyright in the right-bottom-corner.
+                p.fill(0);
+                p.text("\©riastroes2017", p.width-100, p.height-20);
+                p.save(filename);
+            }
+            };
             var my1 = new p5(s2, 'c1');
             </script>
           </div>
