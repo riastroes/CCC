@@ -36,9 +36,9 @@
       <div class="w3-container">
         <br/>
       <p>
-      By now your code will grow larger and it's time to learn to organize your code. 
+      By now your code will grow larger and it's time to learn to organize your code.
       A function is a block of code designed to perform a particular task.
-      
+
       </p>
         <h2 class="w3-theme-l2 w3-center">Functions</h2>
         <p>We have seen already a lot of functions, like setup, draw, ellipse, etc.<br/>
@@ -68,44 +68,73 @@
               //save your file with javascript functions as functions.js
               //create a submap 'mylibrary' in the root of your project.
               //insert inside the heading of your index.html:
-             &lt;script&gt; src="mylibrary/myfunctions.js" type="text/javascript">&lt;/script&gt; 
+             &lt;script&gt; src="mylibrary/myfunctions.js" type="text/javascript">&lt;/script&gt;
           </pre>
+
 
           A function can have a return value.<br/>
           The result of function is stored in a variable<br/>
           For example:<br/>
-         
+
           <pre>
           //definition<br/>
           function sum(a,b){
             //this function will add the values, stored in the two params.
             return a+b;
           }
-          
+
           //call function<br/>
           var c = sum(a,b);<br/>
           </pre>
-          But not all functions have a return value, the setup function and the draw function are examples of functions that execute a specific task, 
-          but as you can see, they don't have a return function.<br/>
+          But not all functions have a return value, the setup function and the draw function are examples of functions that execute a specific task,
+          but as you know, they don't have a return function.<br/>
           The function sum is a very simple function and not so smart, but functions can be very powerfull and can include many lines of codes.<br/>
           <pre>
           Be smart and write your code only once! Create Functions!
           </pre>
 
         </p>
+        <p>So let's create a function.
+          This next function will slow down your animation:
+          <pre>
+            function changeSpeedOfAnimation(){
+              var speed = frameRate();
+              ...
+            }
+          </pre>
+          The code above we call the definition of a function. It is not executed yet. You have to call this function
+          in your code.
+          Lets call this function, when you press the - button on your keyboard. javascript is listening to all kind of events, when your code is running.
+          The keyboard event is one of those events, just like the mouse events. When it hears this event it will call the p5 keyPressed function.
+          the variable keyCode is set with the ASCII code of the pressed key. You can find these ASCII codes
+          <a href="https://www.w3schools.com/charsets/ref_html_ascii.asp"> HTML ASCII REFERENCE </a>
+          Now you can test which key is pressed. The keyCode of the - (minus) is 189 or 109.
+          ASCII codes are on all the computers the same.
+          <pre>
+            function keyPressed(){
+             if (keyCode == 189 ||  p.keyCode == 109 ){
+                changeSpeedOfAnimation();
+              }
+            }
+          </pre>
+          The function frameRate() without any params will give you the current frameRate.
+          If you call this function with a param, the speed, it will set the frameRate to that speed, between 0 and maximum 60.
 
         </div>
     </div>
    <div class="w3-third w3-container">
-     
+
       <ul class="w3-ul">
         <li><h2>You will learn</h2></li>
         <li>Functions</li>
         <li>Parameters</li>
         <li>return</li>
         <li>library</li>
-        
-
+        <li>keyPressed</li>
+        <li>keyCode</li>
+        <li>keyIsPressed</li>
+        <li>HTML ASCII REFERENCE</li>
+        <li>frameRate()</li>
       </ul>
     </div>
   </div>
@@ -113,44 +142,40 @@
   <div class="w3-row  w3-theme-light ">
       <div class="w3-container w3-half">
       <pre>
+        //first click on the example window, so it will have the focus.
+        //you can use the - to change speed of the animation
+var size;
 
-  var x,y;
-  var u;
-  function setup() {
-    createCanvas(windowWidth, windowHeight);
-    background(0,200,0);
-    u = 1;
-  }
-
-  function draw(){
-    strokeWeight(3);
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  background(0,0,200);
+  size = 100;
+}
+function draw(){
     stroke(0);
-    fill(100,0,50);
-    beginShape();
-      vertex(x,y);
-      vertex(x +(3*u),y + (17*u));
-      vertex(x +(5*u),y + (12*u));
-      vertex(x +(4*u),y + (10*u));
-      vertex(x +(1*u),y + (9*u));
-      vertex(x +(4*u),y + (7*u));
-      vertex(x +(2*u),y + (4*u));
-      vertex(x +(5*u),y + (5*u));
-      vertex(x +(7*u),y + (3*u));
-      vertex(x +(9*u),y + (3*u));
-      vertex(x +(12*u),y + (8*u));
-      vertex(x +(10*u),y + (11*u));
-      vertex(x +(8*u),y + (12*u));
-      vertex(x +(6*u),y + (17*u));
-      ...
+    ellipse(random(width), random(height),size, size);
+}
+function keyPressed(){
+  if(keyCode == 189 ||  keyCode == 109 ){
+    // -
+    changeSpeedOfAnimation();
+  }
+ function changeSpeedOfAnimation(){
+    var speed = frameRate();
+    if(speed > 30 ){
+      frameRate(30);
+    }
+    else{
+      frameRate(10);
+    }
 
-    endShape();
+    textSize(100);
+    stroke(255);
+    fill(0);
+    text(speed, 30,130);
 
   }
-
-
-
-
-      </pre>
+}      </pre>
       </div>
       <div class="w3-half w3-container">
         <div class="w3-example">
@@ -158,91 +183,49 @@
           <br/>
           <div id="divcanvas1">
             <script>
-            var s2 = function( p ) {
-            var x,y,u;
+            var s1 = function( p ) {
+            var size;
 
             p.setup = function() {
               var canvas = p.createCanvas(400,320);
               canvas.parent("divcanvas1");
               p.background(0,200,0);
-              x = 200;
-              y = 0;
-              u =20;
-              p.frameRate(1);
+              size = 100;
+
             }
 
             p.draw = function() {
-              p.background(0,200,0);
-              p.strokeWeight(3);
-              p.stroke(0);
-              p.fill(200,0,200);
-              p.beginShape();
-                p.vertex(x +(3*u),y + (17*u));
-                p.vertex(x +(5*u),y + (12*u));
-                p.vertex(x +(4*u),y + (10*u));
-                if(p.frameCount % 2 == 0){
-                  p.vertex(x +(1*u),y + (8*u));
-                  p.vertex(x +(4*u),y + (7*u));
-                  p.vertex(x +(2*u),y + (4*u));
-               }
-                else{
-                  p.vertex(x +(1*u),y + (7*u));
-                }
-                p.vertex(x +(5*u),y + (5*u));
-                p.vertex(x +(7*u),y + (3*u));
-                p.vertex(x +(9*u),y + (3*u));
-                p.vertex(x +(12*u),y + (8*u));
-                p.vertex(x +(10*u),y + (11*u));
-                p.vertex(x +(8*u),y + (12*u));
-                p.vertex(x +(6*u),y + (17*u));
+               p.stroke(0);
+               p.fill(255);
+               p.ellipse(p.random(p.width), p.random(p.height),size,size);
+            }
 
-                if(p.frameCount % 2 == 0){
-                p.beginContour();
-                  p.vertex(x +(6*u),y + (6*u));
-                  p.vertex(x +(7*u),y + (8*u));
-                  p.vertex(x +(8*u),y + (8*u));
-                  p.vertex(x +(9*u),y + (6*u));
-                  p.vertex(x +(7*u),y + (5*u));
-                p.endContour();
-              }
-              p.endShape(p.CLOSE);
-              p.beginShape();
-                p.vertex(x -(3*u),y + (17*u));
-                p.vertex(x -(5*u),y + (12*u));
-                p.vertex(x -(4*u),y + (10*u));
-                if(p.frameCount % 2 == 1){
-                  p.vertex(x -(1*u),y + (8*u));
-                  p.vertex(x -(4*u),y + (7*u));
-                  p.vertex(x -(2*u),y + (4*u));
-               }
-                else{
-                  p.vertex(x -(1*u),y + (7*u));
-                }
-                p.vertex(x -(5*u),y + (5*u));
-                p.vertex(x -(7*u),y + (3*u));
-                p.vertex(x -(9*u),y + (3*u));
-                p.vertex(x -(12*u),y + (8*u));
-                p.vertex(x -(10*u),y + (11*u));
-                p.vertex(x -(8*u),y + (12*u));
-                p.vertex(x -(6*u),y + (17*u));
+            p.keyPressed = function(){
 
-                if(p.frameCount % 2 == 1){
-                p.beginContour();
-                  p.vertex(x -(6*u),y + (6*u));
-                  p.vertex(x -(7*u),y + (8*u));
-                  p.vertex(x -(8*u),y + (8*u));
-                  p.vertex(x -(9*u),y + (6*u));
-                  p.vertex(x -(7*u),y + (5*u));
-                p.endContour();
+                if(p.keyCode == 189 ||  p.keyCode == 109 ){
+                  p.changeSpeedOfAnimation();
               }
-              p.endShape(p.CLOSE);
+            }
+            p.changeSpeedOfAnimation = function(){
+              var speed = p.frameRate();
+              if(speed > 30 ){
+                p.frameRate(30);
+              }
+              else{
+                p.frameRate(10);
+              }
+                p.textSize(100);
+                p.stroke(255);
+                p.fill(0);
+                p.text(speed, 30,130);
+
             }
           };
-            var my1 = new p5(s2, 'c1');
+            var my1 = new p5(s1, 'c1');
             </script>
           </div>
           <p>
-            <a href="https://www.openprocessing.org/sketch/394570">open sketch in openprocessing</a>
+            <a href="https://www.openprocessing.org/sketch/411841">open sketch in openprocessing</a>
           </p>
 
         </div>
@@ -253,45 +236,8 @@
           <div class="w3-container">
             <br/>
           <p>
-          In the example above there is a shape within a shape.  The eye in the bird is created
-          with a beginContour and endContour function. You can use this for inner parts,
-          but remember that you have to change the direction of defining the vertexes on the canvas.
-          If the shape is defined clockwise than you have to use counter-clockwise direction for the
-          vertexes in the contour functions.<br/>
-          <pre>
-beginShape()
-  //define clockwise
-  vertex(x,y);
-  ...
-  beginContour()
-    //define counter-clockwise
-    vertex(x,y);
-    ...
-  endContour(CLOSE);
-endShape(CLOSE);
-</pre>
-
-          tip:<br/>
-          Because the image is symetric, I only had to type in half the code.
-          I could copy the other bird and only change the sign of the x values.
-          And I made a few changes.
-          </p>
-          <p>
-            These two birdshead are also an example how you can use different scenes in your sketch.
-            The frameCount variable is a counter for the frames in the loop of the draw function.
-            Now I use every second frame to display the open beck and the eye of one bird and the other way
-            around with the second bird.
-            The modulo operator is giving the rest value after devision.
-
-
-<pre>
-  // you say if framecount modulo two is equal to 0
-  if(frameCount % 2 == 0){    // 0 1 0 1 0 1
-  }
-</pre>
-            The result of frameCount % 5 will be 0 1 2 3 4 0 1 2 3 4 0 1 2 3 4 etc.<br/>
-            So the modulo operator can help you to construct an repeating pattern in the loop of the draw function.
-            With the frameRate function you can slow down your sketch.
+            Function are used a lot to organize the code. <br/>
+            In the next example I have created first the pseudo-code in functions.
           </p>
         </div>
       </div>
@@ -299,36 +245,31 @@ endShape(CLOSE);
 <div class="w3-row  w3-theme-light ">
 <div class="w3-container w3-half">
 <pre>
-var rabbit,head,littlehead;
-function preload(){
-  rabbit = loadImage("rabbit.png");
-  head = loadImage("head.png");
-  littlehead = loadImage("littlehead.png");
+  //pseudo-code
+  //game a cat is laying in front of a hole, and when the mouse comes out, the cat is trying to catch the mouse.
+  //move the cat with the spacebar of your keyboard, but be quick.
 
-}
-function setup() {
-  createCanvas(400,400);
-  background(200);
-  imageMode(CENTER);
-  frameRate(1);
-}
 
-function draw() {
-  background(255);
-  if(frameCount % 3 == 0){
-    image(head, 200,250);
+  function createBackground(){
+    //There are three holes in the background.
   }
-  else if(frameCount % 3 == 1){
-    image(head, 200,250);
-    image(rabbit, 200,160);
+  function createCat(x,y, type ){
+    //the cat has two shapes, one in standing position
+    //one after he has jumped.
   }
-  else if(frameCount % 3 == 2){
+  function createMouse(x,y){
+    // the mouse is running out a hole to the right.
+  }
+  function jumpCat(hole){
+    // the cat will jump to position 1, 2 or 3.
+  }
 
-    image(rabbit, 200,160);
-    image(littlehead, 200,140);
-  }
-}
   </pre>
+  <p>Think about all the aspects of your animation or game, and write it down in pseudo-code.
+    Use function to order your idea and your code!
+    Give your functions a good descriptive name.
+    Now your problem is split into smaller problems, you can solve.
+  </p>
   </div>
 
   <div class="w3-half w3-container">
@@ -338,34 +279,45 @@ function draw() {
       <div id="divcanvas2">
         <script>
         var s2 = function( p ) {
-        var rabbit,head, littlehead;
-        p.preload = function() {
-          rabbit = p.loadImage("resources/rabbit.png");
-          head = p.loadImage("resources/head.png");
-          littlehead = p.loadImage("resources/littlehead.png");
-        }
+        //positions of the holes and the mouse
+        var x1,y1, x2,y2, x3,y3;
+
+
         p.setup = function() {
           var canvas = p.createCanvas(400,400);
           canvas.parent("divcanvas2");
-          p.background(255);
-          p.imageMode(p.CENTER);
-          p.frameRate(1);
+
+
         }
         p.draw = function() {
-          p.background(255);
-          if(p.frameCount % 3 == 0){
-            p.image(head, 200,250);
-          }
-          else if(p.frameCount % 3 == 1){
-            p.image(head, 200,250);
-            p.image(rabbit, 200,160);
-          }
-          else if(p.frameCount % 3 == 2){
+          createBackground();
+          createMouse(200,200);
 
-            p.image(rabbit, 200,160);
-            p.image(littlehead, 200,140);
           }
-       }
+        createBackground = function(){
+            //There are three holes in the background.
+            p.background(200,200,20);
+            x1 = 50;
+            y1 = 100;
+            p.stroke(0);
+            p.fill(0);
+            p.ellipse(x1, y1, 50,50);
+            x2 = 200;
+            y2 = 100;
+            p.ellipse(x2, y2, 50,50);
+            x3 = 350;
+            y3 = 100;
+            p.ellipse(x3, y3, 50,50);
+        }
+        createMouse = function(x,y){
+          p.stroke(0);
+          p.fill(0);
+          p.ellipse(x, y, 20,10);
+          p.triangle(x, y-5, x, y+5, x+15, y);
+          p.strokeWeight(3);
+          p.line(x,y, x-30, y);
+        }
+
       };
         var my1 = new p5(s2, 'c1');
         </script>
@@ -381,40 +333,15 @@ function draw() {
   <div class="w3-one w3-container">
     <div class="w3-container">
       <br/>
-      <p>In the next example I created a pattern with two nested iterations.
-        The y is increased by 30 and is iterating from 0 - 400:<br/>
-        <pre>0 30 60 60 120 150 180 210 240 270 300 330 360 390 </pre>
-         If y = 0 then the x is iterating  from 0 - 400, the x is increased by 50:
-        <pre> 0 50 100 150 200 250 300 350 </pre>
-        then y = 30 and again the x is iterating from 0 - 400:
-        <pre> 0 50 100 150 200 250 300 350 </pre>
-        then y = 60 etc.
-        The x and y values are used to generate different colors.
-
+      <p>
+      </p>
     </div>
   </div>
 </div>
 <div class="w3-row  w3-theme-light ">
 <div class="w3-container w3-half">
 <pre>
-function setup(){
-  createCanvas(400,400);
-  background(200,180,220);
-}
-function draw(){
-  for(var y = 0; y < height; y += 30){
-    for(var x = 0; x < width; x += 50){
-      fill(x,y,255);
-      beginShape();
-        vertex(x,y);
-        vertex(x + 50, y);
-        vertex(x + 40, y + 30);
-        vertex(x + 10, y + 20);
-        vertex(x - 20, y + 10);
-      endShape(CLOSE);
-    }
-  }
-}
+
   </pre>
   </div>
 
@@ -471,35 +398,6 @@ function draw(){
 <div class="w3-row  w3-theme-light ">
 <div class="w3-container w3-half">
 <pre>
-var x,y;
-function setup(){
-  createCanvas(400,400);
-  stroke(0);
-  noFill();
-  strokeWeight(5);   //use a thick line.
-  x = 0;
-  y = height/2;
-}
-function draw(){
-  background(200,180,220);
-  beginShape();
-    vertex(0,height/2);
-    vertex(x, y);
-    vertex(x, y -100);
-    vertex(x + 5, y -100);
-    ...
-    vertex(x + 10, y -20);
-    vertex(x + 10, y);
-    vertex(x, y);
-    vertex(width,height/2);
-  endShape();
-  //let's move
-  x++;
-  if(x>width){
-    //start over again.
-    x = 0;
-  }
-}
   </pre>
   </div>
 
@@ -509,7 +407,7 @@ function draw(){
       <br/>
       <div id="divcanvas4">
         <script>
-        var s2 = function( p ) {
+        var s3 = function( p ) {
         var x,y;
         p.setup = function() {
           var canvas = p.createCanvas(400,400);
@@ -554,7 +452,7 @@ function draw(){
           }
        }
       };
-        var my1 = new p5(s2, 'c1');
+        var my1 = new p5(s3, 'c1');
         </script>
       </div>
       <p>
