@@ -310,104 +310,105 @@ function keyPressed(){
       <br/>
       <div id="divcanvas2">
         <script>
-        var s2 = function( p0 ) {
-        //positions of the holes and the mouse
-        //positions of the holes and the mouse
-         var x1,y1, x2,y2, x3,y3;
+        var s2 = function( p ) {
+
+         var x1,y1, x2,y2, x3,y3; //positions of the holes
          var typeCat;
          var run;
- 		var runx;
+ 		     var runx;
          var direction;
- 		var speed;
+ 		     var speed;
 
-         setup = function() {
-           var canvas = createCanvas(400,400);
+         p.setup = function() {
+           var canvas = p.createCanvas(400,400);
+           canvas.parent("divcanvas2");
+           x1 = 50;			//hole 1 in the background
+           y1 = 100;
+           x2 = 300;		//hole 2 in the background
+           y2 = 100;
            typeCat = "none";
            run = false;
            runx = 0;
            direction = 0;
            speed = 1;
-
          }
-         draw = function() {
+         p.draw = function() {
            createBackground();
            runMouse();
-           createCat(mouseX,mouseY);
+           createCat(p.mouseX,p.mouseY);
          }
          createBackground = function(){
              //There are three holes in the background.
-             background(200,200,20);
-             x1 = 50;
-             y1 = 100;
-             stroke(0);
-             fill(0);
-             ellipse(x1, y1-20, 60,60);
-             x2 = 300;
-             y2 = 100;
-             ellipse(x2, y2-20, 60,60);
+             p.background(200,200,20);
+             p.stroke(0);
+             p.fill(0);
+             p.ellipse(x1, y1, 60,60);
+             p.ellipse(x2, y2, 60,60);
          }
          createMouse = function(x,y, direction){
-           stroke(0);
-           fill(0);
+           p.stroke(0);
+           p.fill(0);
            if(direction == 1){ // mouse is going to the right
-             ellipse(x, y, 20,10);
-             ellipse(x+5, y-5, 5,5);
-             ellipse(x+5, y+5, 5,5);
+             p.ellipse(x, y, 20,10);
+             p.ellipse(x+5, y-5, 5,5);
+             p.ellipse(x+5, y+5, 5,5);
 
-             triangle(x, y-4, x, y+4, x+10, y);
-             strokeWeight(2);
-             line(x,y, x-30, y);
+             p.triangle(x, y-4, x, y+4, x+10, y);
+             p.strokeWeight(2);
+             p.line(x,y, x-30, y);
            }
            else{ // mouse is going to the left
-             ellipse(x, y, 20,10);
-             ellipse(x-5, y-5, 5,5);
-             ellipse(x-5, y+5, 5,5);
+             p.ellipse(x, y, 20,10);
+             p.ellipse(x-5, y-5, 5,5);
+             p.ellipse(x-5, y+5, 5,5);
 
-             triangle(x, y-4, x, y+4, x-10, y);
-             strokeWeight(2);
-             line(x,y, x+30, y);
+             p.triangle(x, y-4, x, y+4, x-10, y);
+             p.strokeWeight(2);
+             p.line(x,y, x+30, y);
            }
          }
          createCat = function(x,y){
-           stroke(0);
-           fill(0);
+           p.stroke(0);
+           p.fill(0);
+           if(typeCat == "none"){
+             p.textSize(30);
+             p.stroke(0);
+             p.fill(0);
+             p.text("click mouse to start.", 50,200);
+             p.text("jump on mouse to win!", 50,230);
+             p.text("press j to jump.", 50,260);
 
-           if(typeCat == "wait"){
+           }
+           else if(typeCat == "wait"){
              if(y < y1 + 100){
                y = y1 + 100;
              }
-             ellipse(x, y, 40,40);
-             ellipse(x, y-20, 30,30);
-             triangle(x-10, y-30, x-5, y-30, x-10, y-40);
-             triangle(x+10, y-30, x+5, y-30, x+10, y-40);
-             strokeWeight(4);
-             line(x,y+20, x-60, y+20);
+             p.ellipse(x, y, 40,40);
+             p.ellipse(x, y-20, 30,30);
+             p.triangle(x-10, y-30, x-5, y-30, x-10, y-40);
+             p.triangle(x+10, y-30, x+5, y-30, x+10, y-40);
+             p.strokeWeight(4);
+             p.line(x,y+20, x-60, y+20);
            }
            else if(typeCat == "jump"){
              y = y1+45;
-             ellipse(x, y-10, 40,60);
-             ellipse(x, y-50, 30,30);
-             triangle(x-15, y-55, x-5, y-60, x-15, y-70);
-             triangle(x+15, y-55, x+5, y-60, x+15, y-70);
-             line(x,y+20, x, y+90);
-             strokeWeight(8);
-             line(x,y, x-10, y-90);
-             line(x,y, x+10, y-90);
-             line(x-10,y, x-10, y+90);
-             line(x+10,y, x+10, y+90);
+             p.ellipse(x, y-10, 40,60);
+             p.ellipse(x, y-50, 30,30);
+             p.triangle(x-15, y-55, x-5, y-60, x-15, y-70);
+             p.triangle(x+15, y-55, x+5, y-60, x+15, y-70);
+             p.line(x,y+20, x, y+90);
+             p.strokeWeight(8);
+             p.line(x,y, x-10, y-90);
+             p.line(x,y, x+10, y-90);
+             p.line(x-10,y, x-10, y+90);
+             p.line(x+10,y, x+10, y+90);
            }
-           else if(typeCat == "none"){
-             textSize(30);
-             stroke(0);
-             fill(0);
-             text("click mouse to start", 50,200);
-             text("jump on mouse to win!", 50,230);
-           }
+
          }
          runMouse = function(){
 
            if(run == false){
-             if(random(2)<1){
+             if(p.random(2)<1){
                direction = 1;
                createMouse(x1,y1, direction); // mouse in hole 1
                run = true;
@@ -443,34 +444,29 @@ function keyPressed(){
           }
            }
          }
-         keyPressed = function(){
+         p.keyPressed = function(){
 
-           if(keyCode ==74 || keyCode == 106 ){
-
-
-             typeCat = "jump";
-
-             if(abs(mouseX-(x1+runx))<10  || abs(mouseX-(x2+runx))<10){
+           if(p.keyCode ==74 || p.keyCode == 106 ){
+             if(p.abs(p.mouseX-(x1+runx))<10  || p.abs(p.mouseX-(x2+runx))<10){
                  //yes a catch
-                 fill(0);
-                 textSize(10);
-                 text("jump: " +abs(mouseX-(x1+runx)) ,50,230);
-                 console.log(abs(mouseX-(x1+runx)));
-            	 	direction = 0;
+                 typeCat = "jump";
+                 p.fill(0);
+                 p.textSize(10);
+                 p.text("jump: " +p.abs(p.mouseX-(x1+runx)) ,50,230);
+                 p.console.log(p.abs(p.mouseX-(x1+runx)));
+            	 	 direction = 0;
                  runx = 0;
-               	speed += 1;
-
+               	 speed += 1;
              }
              else{
                typeCat = "wait";
-               run = false;
              }
            }
-           else if(keyCode == 87 || keyCode == 119 ){
+           else if(p.keyCode == 87 || p.keyCode == 119 ){
              typeCat = "wait";
            }
          }
-         mousePressed = function(){
+         p.mousePressed = function(){
             typeCat = "wait";
             run = false;
          }
@@ -480,7 +476,7 @@ function keyPressed(){
         </script>
       </div>
       <p>
-        <a href="https://www.openprocessing.org/sketch/396208">open sketch in openprocessing</a>
+        <a href="https://www.openprocessing.org/sketch/412731">open sketch in openprocessing</a>
       </p>
 
     </div>
