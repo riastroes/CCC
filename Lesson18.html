@@ -41,7 +41,7 @@
 
       </p>
         <h2 class="w3-theme-l2 w3-center">Functions</h2>
-        <p>We have seen already a lot of functions, like setup, draw, ellipse, etc.<br/>
+        <p>We have already seen several functions, like setup, draw, ellipse, etc.<br/>
            These functions are part of the p5 library. So you already know how to call a function.<br/>
            Now you will learn how to define a function:
           <pre>
@@ -166,7 +166,7 @@ function keyPressed(){
         slowDownAnimation();
     }
       if(keyCode == 187 ||  keyCode == 107 ){
-        peedUpAnimation();
+        speedUpAnimation();
     }
   }
   function showSpeed(speed){
@@ -211,7 +211,7 @@ function keyPressed(){
 
             p.draw = function() {
                p.stroke(0);
-               p.fill(0,0,p.random(255));
+               p.fill(p.random(255),p.random(255),p.random(255));
                p.ellipse(p.random(p.width), p.random(p.height),size,size);
             }
 
@@ -276,31 +276,34 @@ function keyPressed(){
 <pre>
   //pseudo-code
   //game a cat is laying in front of a hole, and when the mouse comes out, the cat is trying to catch the mouse.
-  //move the cat with the spacebar of your keyboard, but be quick.
+  //move the cat with your mouse, but be quick.
 
 
   function createBackground(){
     //There are two holes in the background.
   }
-  function createCat(x,y, type ){
-    //the cat has two shapes, one in standing position
-    //one after he has jumped.
-  }
   function createMouse(x,y){
-    // the mouse is running from hole to hole.
+    // mouse to the left and mouse to the right
   }
-  function runMouse(x,y){
-    // Run mouse from hole 1 naar hole 2 or from hole 2 naar hole 1
+  function liveMouse(x,y){
+    // mouse is running from hole 1 t0 hole 2 or from hole 2 to hole 1
+    - selectHoleAndWait
+    - runMouse
   }
-  function jumpCat(hole){
-    // the cat will jump to position 1, 2 or 3.
+  function createCat(x,y, type ){
+    //the cat has two shapes, one in waiting position.
+    //one in jumping position.
+  }
+  function actionCat(){
+    // the cat can jump to catch the mouse.
   }
 
   </pre>
   <p>Think about all the aspects of your animation or game, and write it down in pseudo-code.
-    Use function to order your idea and your code!
+    Use functions to order your idea and your code!
     Give your functions a good descriptive name.
-    Now your problem is split into smaller problems, you can solve.
+    Now your big problem is split into smaller problems.
+    Start solving your problems one by one.
   </p>
   </div>
 
@@ -312,30 +315,36 @@ function keyPressed(){
         <script>
         var s2 = function( p ) {
 
-         var x1,y1, x2,y2, x3,y3; //positions of the holes
+         var x1,y1, x2,y2; //positions of the holes
+         var x,y; //positon of mouse
          var typeCat;
-         var run;
- 		     var runx;
+         var isRunning;
          var direction;
  		     var speed;
+         var wait;
 
          p.setup = function() {
            var canvas = p.createCanvas(400,400);
            canvas.parent("divcanvas2");
            x1 = 50;			//hole 1 in the background
            y1 = 100;
-           x2 = 300;		//hole 2 in the background
+           x2 = p.width-50;		//hole 2 in the background
            y2 = 100;
+           x = x1;
+           y = y1;
            typeCat = "none";
-           run = false;
-           runx = 0;
+           isRunning = false;
            direction = 0;
            speed = 1;
+           wait = 0;
          }
          p.draw = function() {
            createBackground();
-           runMouse();
+           liveMouse();
            createCat(p.mouseX,p.mouseY);
+         }
+         p.mousePressed = function(){
+           actionCat();
          }
          createBackground = function(){
              //There are three holes in the background.
@@ -375,8 +384,8 @@ function keyPressed(){
              p.stroke(0);
              p.fill(0);
              p.text("click mouse to start.", 50,200);
-             p.text("jump on mouse to win!", 50,230);
-             p.text("press j to jump.", 50,260);
+             p.text("click cat to catch mouse", 50,230);
+
 
            }
            else if(typeCat == "wait"){
@@ -396,8 +405,10 @@ function keyPressed(){
              p.ellipse(x, y-50, 30,30);
              p.triangle(x-15, y-55, x-5, y-60, x-15, y-70);
              p.triangle(x+15, y-55, x+5, y-60, x+15, y-70);
+             p.strokeWeight(5);
              p.line(x,y+20, x, y+90);
              p.strokeWeight(8);
+
              p.line(x,y, x-10, y-90);
              p.line(x,y, x+10, y-90);
              p.line(x-10,y, x-10, y+90);
@@ -405,70 +416,71 @@ function keyPressed(){
            }
 
          }
-         runMouse = function(){
-
-           if(run == false){
-             if(p.random(2)<1){
-               direction = 1;
-               createMouse(x1,y1, direction); // mouse in hole 1
-               run = true;
-             }
-             else{
-               direction = -1;
-               createMouse(x2,y2, direction); // mouse in hole2
-               run = true;
-             }
+         liveMouse = function(){
+           if(isRunning == false){
+             selectHoleAndWait();
            }
            else{
+             runMouse();
+           }
+           createMouse(x,y,direction);
+         }
 
-             if(typeCat == "wait"){
-               run = true;
-               runx += direction * speed;
-               if(direction == 1){ //going to the right
-                 createMouse(x1 + runx,y1, direction)
-                 if(runx + x1 > x2){
-                   direction = -1;
-                   runx = 0;
-                 }
-               }
-               else if(direction == -1){ //going to the left
-                 createMouse(x2 + runx,y2, direction)
-                 if(runx + x2 < x1){
-                   direction = 1;
-                   runx =0;
-                 }
-               }
-               else {
-                 createMouse(x1 + 200,y1, direction);
-               }
+         selectHoleAndWait = function(){
+           if(wait > 0){
+             wait -= 1;
+           }
+           else{
+             if(p.random(2)<1){
+                  x = x1;
+                  y = y1;
+                  direction = 1;
+                  speed += 0.3;
+                }
+            else{
+                  x = x2;
+                  y = y2;
+                  direction = -1;
+                  speed += 0.3;
+                }
+            isRunning = true;
+           }
+
+
+         }
+         runMouse = function(){
+           if(isRunning){
+             x += (direction * speed);
+             if(x > x2 || x < x1){
+               wait = p.floor(p.random(1000));
+               isRunning = false;
+             }
+           }
+
+         }
+
+
+         mouseIsDeath = function(){
+           direction = 0;
+           wait = p.floor(p.random(1000));
+           isRunning = false;
+
+         }
+         actionCat = function(){
+           if(typeCat == "wait"){
+            typeCat = "jump";
+            if(abs(p.mouseX-(x))<10){
+              mouseIsDeath();
+            }
+            else{
+              direction = -direction;
+              typeCat ="wait";
+            }
           }
-           }
-         }
-         p.keyPressed = function(){
-
-           if(p.keyCode ==74 || p.keyCode == 106 ){
-             if(p.abs(p.mouseX-(x1+runx))<10  || p.abs(p.mouseX-(x2+runx))<10){
-                 //yes a catch
-                 typeCat = "jump";
-                 p.fill(0);
-                 p.textSize(10);
-                 p.text("jump: " +p.abs(p.mouseX-(x1+runx)) ,50,230);
-                 p.console.log(p.abs(p.mouseX-(x1+runx)));
-            	 	 direction = 0;
-                 runx = 0;
-               	 speed += 1;
-             }
-             else{
-               typeCat = "wait";
-             }
-           }
-           else if(p.keyCode == 87 || p.keyCode == 119 ){
-             typeCat = "wait";
-           }
-         }
-         p.mousePressed = function(){
-            typeCat = "wait";
-            run = false;
+          else {
+            typeCat ="wait";
+            wait = 0;
+          }
          }
 
       };
@@ -487,8 +499,13 @@ function keyPressed(){
     <div class="w3-container">
       <br/>
       <p>
+        The next handy function will save an image of your animation
+        and add a copyright sign to it.
 
-
+        This function is called after pressing the s on your keyboard.
+        Don't add this function in the draw loop, because your browser
+        will keep asking if you want to save an image and it will get
+        stuck in a never ending loop.
 
       </p>
     </div>
@@ -497,27 +514,22 @@ function keyPressed(){
 <div class="w3-row  w3-theme-light ">
 <div class="w3-container w3-half">
 <pre>
-function setup() {
-  createCanvas(windowWidth, windowHeight);
-  background(0,200,0);
-}
-
-function safeSave(filename){
-  if(frameCount % 100 == 0){
-    //filename use frameCount as sequence number.
-    var name = filename  + frameCount + ".png";
-
-    //copyright in the right-bottom-corner.
-    fill(0);
-    text("©riastroes2017", width-100, height-20);
-      save(filename);
+  ...
+  function keyPressed(){
+    if(keyCode == 83 || keyCode == 115){   // S or s
+      saveImage("abstract");
     }
-}
-function draw(){
-    fill(random(255);
-    ellipse(mouseX, mouseY, 100);
-    safeSave("abstract");
   }
+  function saveImage(filename) {
+
+    //use frameCount as sequence number.
+    var name = filename  + p1.frameCount + ".png";
+    //copyright in the right-bottom-corner.
+     p1.fill(0);
+     p1.text("&copy;riastroes2017", p1.width-100, p1.height-20);
+     p1.save(name);
+  }
+  ...
   </pre>
   </div>
 
@@ -528,146 +540,79 @@ function draw(){
       <div id="divcanvas4">
 
           <script>
-        var s1 = function( p1 ) {
-        p1.setup = function() {
-          var canvas = p1.createCanvas(400,320);
-          canvas.parent("divcanvas4");
-          p1.background(0,200,0);
-        }
-
-        p1.draw = function() {
-
-          p1.fill(p1.random(255));
-          p1.ellipse(p1.mouseX, p1.mouseY, 100);
-          p1.safeSave("abstract");
-        }
-
-        p1.safeSave = function(filename) {
-
-        //  if(p1.frameCount % 100 == 0 && s1f){
-            //filename use frameCount as sequence number.
-            var name = filename  + p1.frameCount + ".png";
-            //copyright in the right-bottom-corner.
-        //    p1.fill(0);
-        //    p1.text("\©riastroes2017", p1.width-100, p1.height-20);
-        //    p1.save(name);
-        //  }
-        }
-        };
-        var my1 = new p5(s1, 'c1');
-
-        </script>
-      </div>
-      <p>
-        <a href="https://www.openprocessing.org/sketch/396293">open sketch in openprocessing</a>
-      </p>
-
-    </div>
-  </div>
-</div>
-<div class="w3-row">
-  <div class="w3-one w3-container">
-    <div class="w3-container">
-      <br/>
-      <p>This is an example of a one-line-drawing.<br/>
-        Because the first and the last vertexes are fixed, they allways have the same value
-        and the dog can move on the line.</p>
-
-    </div>
-  </div>
-</div>
-<div class="w3-row  w3-theme-light ">
-<div class="w3-container w3-half">
-<pre>
-  </pre>
-  </div>
-
-  <div class="w3-half w3-container">
-    <div class="w3-example">
-
-      <br/>
-      <div id="divcanvas4">
-        <script>
-        var s3 = function( p ) {
-        var x,y;
-        p.setup = function() {
-          var canvas = p.createCanvas(400,400);
-          canvas.parent("divcanvas4");
-
-          p.stroke(0);
-          p.noFill();
-          p.strokeWeight(5);
-          x = 0;
-          y = p.height-50;
-
-        }
-        p.draw = function() {
-          p.background(200,180,220);
-          p.beginShape();
-            p.vertex(0,p.height-50);
-            p.vertex(x, y);
-            p.vertex(x, y -100);
-            p.vertex(x + 5, y -100);
-            p.vertex(x + 5, y -50);
-            p.vertex(x + 40, y -50);
-            p.vertex(x + 50, y -70);
-            p.vertex(x + 55, y -80);
-            p.vertex(x + 53, y -70);
-            p.vertex(x + 60, y -60);
-            p.vertex(x + 70, y -50);
-            p.vertex(x + 60, y -40);
-            p.vertex(x + 55, y -40);
-            p.vertex(x + 55, y );
-            p.vertex(x + 45, y );
-            p.vertex(x + 45, y -20);
-            p.vertex(x + 10, y -20);
-            p.vertex(x + 10, y);
-            p.vertex(x, y);
-            p.vertex(p.width,p.height-50);
-          p.endShape();
-          //let's move
-          x++;
-          if(x>p.width){
-            //start over again.
-            x = 0;
+          var s1 = function( p1 ) {
+          p1.setup = function() {
+            var canvas = p1.createCanvas(400,320);
+            canvas.parent("divcanvas4");
+            p1.background(0,200,0);
           }
-       }
-      };
-        var my1 = new p5(s3, 'c1');
+
+          p1.draw = function() {
+
+            p1.fill(p1.random(255));
+            p1.ellipse(p1.mouseX, p1.mouseY, 100);
+
+          }
+          p1.keyPressed = function(){
+            if(p1.keyCode == 83 || p1.keyCode == 115){
+              saveImage("abstract");
+            }
+          }
+          saveImage = function(filename) {
+            //copyright in the right-bottom-corner.
+            p1.fill(0);
+            p1.text("copyright RiaStroes2017", p1.width-135, p1.height-20);
+
+            //use frameCount as sequence number.
+            var name = filename  + p1.frameCount + ".png";
+            p1.save(name);
+          }
+          };
+          var my1 = new p5(s1, 'c1');
         </script>
       </div>
       <p>
-        <a href="https://www.openprocessing.org/sketch/396864">open sketch in openprocessing</a>
+        <a href="https://www.openprocessing.org/sketch/412810">open sketch in openprocessing</a>
       </p>
 
     </div>
   </div>
 </div>
+
   <div class="w3-row">
       <div class="w3-one " style="padding:16px">
   <h1  class="w3-theme-l2 w3-center w3-jumbo">Assignments</h1>
-  <h3>3. Create a pattern with shapes.</h3>
+  <h3>3. Create your own save function.</h3>
   <ul class ="w3-ul" >
-      <li>A pattern with a nested iteration.</li>
-      <li>Create a motif 100  by 100 pixels</li>
-      <li>x and y will increase by 100</li>
-      <li>You can make the shapes smaller or bigger then the motif.</li>
+      <li>save a frame of your animation.</li>
+      <li>add your initials, signature or copyright</li>
+      <li>save this function in a seperate .js file</li>
+      <li>add this file to your next project in the index.html.</li>
   </ul>
 
-  <h3>2. Mixed Media</h3>
+  <h3>2. Paintbox</h3>
 
   <ul class ="w3-ul" >
-      <li>Search an image of an object and draw the surrounding area with shapes.</li>
-      <li>Example 1: Use a photo of your self and create with shapes a landscape, mountain climbing, swimming in the sea, etc.</li>
-      <li>Example 1: Use a photo of a dog and create with shape a monster, that attacks the dog.</li>
-      <li>Use an image with a transparent background.</li>
-      <li>Don't forget to make a sketch on paper.</li>
+      <li>Create different function for different brushes.</li>
+      <li>A brush has a small shape.</li>
+      <li>A brush has transparent of opaque colors.</li>
+      <li>Switch brushes by pressing a key on your keyboard.</li>
+      <li>clear your canvas by pressing the spacebar.</li>
+      <li>a solution:<a href="https://www.openprocessing.org/sketch/412815">paintbox</a></li>
   </ul>
 
-  <h3>3. One line drawing.</h3>
+  <h3>3. Game 1</h3>
   <ul class ="w3-ul" >
-      <li>Create a one-line-drawing</li>
-      <li>First make a sketch on paper!</li>
+      <li>Write your own simple game in pseudo-code</li>
+      <li>Try to create some of the functions.</li>
+  </ul>
+  <h3>4. Game 2</h3>
+  <ul class ="w3-ul" >
+      <li>Create the background of a labyrinth game.</li>
+  </ul>
+  <h3>5. Game 3</h3>
+  <ul class ="w3-ul" >
+      <li>Create a function to simulate the rolling of a dice.</li>
   </ul>
 
 
