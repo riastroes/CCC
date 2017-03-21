@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+<title>CCC: Lesson 19</title>
+<META NAME="COPYRIGHT" CONTENT="&copy; Ria Stroes">
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+<META name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-pink.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/addons/p5.dom.min.js" type="text/javascript"></script>
+<script src="http://www.w3schools.com/lib/w3data.js"></script>
+<script src="../mylib/Google.js" type="text/javascript"></script>
+<style>
+.w3-sidenav a {padding:16px;}
+</style>
+<body>
+  <div w3-include-html="menu.html"></div>
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
+<div class="w3-main" style="margin-left:250px;">
+<div id="myTop" class="w3-top w3-container w3-padding-16 w3-theme w3-large">
+  <i class="fa fa-bars w3-opennav w3-hide-large w3-xlarge w3-margin-left w3-margin-right" onclick="w3_open()"></i>
+  <span id="myIntro" class="w3-hide">Creative Coding Course in P5</span>
+</div>
+
+<header class="w3-container w3-theme w3-padding-64" style="padding-left:16px">
+  <h1 class="w3-xxxlarge w3-padding-16">Creative Coding Course</h1>
+  <h2 class="w3-large">Lesson 19: Operators</h2>
+</header>
+
+<div class="w3-container" >
+
+  <div class="w3-row">
+    <div class="w3-twothird w3-container">
+      <div class="w3-container">
+        <br/>
+      <p>
+        These Operators can operate on the variables before and after the operator.
+      </p>
+      <h2 class="w3-theme-l2 w3-center">operators</h2>
+      <p>
+         +, -, *, \, +, -, % <br/>
+         The operator sum can add variables, numbers and strings.
+         When you add a string and a number, it will become a string!
+
+      </p>
+      <pre>
+                              // + sum
+var a = b + c;                // sum variables
+var d = 1 + 2;                // sum values
+var e = f + 2;                // sum variable and value
+var name= "name: " + "Janet"; // "name: Janet";
+var nr  = "nr: "    + 1 ;     // "nr: 1"
+
+                              // - subtract
+var a = b - c;                // subtract variables
+var d = 7 - 3;                // subtract values
+var e = d - 2;                // subtract variable and value
+
+                              // * product
+var a = b * c;                // product of variables  (b x c)
+var d = 7 - 3;                // product values
+var g = d - 2;                // product variable and value
+
+                              // / division
+var a = b / c;                // a is result of b divide by c
+var d = 9 / 2;                // d is result of 9 divided by 2, is 4.5
+var g = d / 2;                // g is result of variable d divided by 2
+
+                              // % modulus
+var a = b % 2;                // returns the division remainder,
+var d = 8 % 3;                // d is the remainder of 8 devided by 3 is 2
+var g = d % 5;                // g is the remainder of d devided by 5 is 0,1,2,3 or 4.
+      </pre>
+      <p>
+      If you devide an variable, the result will be a floating point value.
+      The remainder of a modulus operation is allways an integer.
+      </p>
+      </div>
+    </div>
+    <div class="w3-row  w3-theme-light ">
+        <div class="w3-container w3-half">
+        <pre>
+//This is an example with the modulus operator.
+function draw() {
+  if(frameCount % 3 == 0){
+    	fill(0,60);
+    	noStroke();
+  		ellipse(random(width), random(height), 20, 20);
+  }
+  else if(frameCount % 3 == 1){
+    	fill(100,60);
+    	stroke(100,0,0,100);
+  		ellipse(random(width), random(height), 120, 120);
+  }
+  else if(frameCount % 3 == 2){
+    	fill(200,60);
+    	noStroke();
+    	ellipse(random(width), random(height), 220, 220);
+  }
+       </pre>
+        </div>
+        <div class="w3-half w3-container">
+          <div class="w3-example">
+
+            <br/>
+            <div id="divcanvas1">
+              <script>
+              var s1 = function( p ) {
+
+                p.setup = function() {
+                  var canvas = p.createCanvas(400,320);
+                  canvas.parent("divcanvas1");
+                  p.background(100,0,0);
+                  p.frameRate(5); 					// slow down
+                }
+
+
+                p.draw = function() {
+                  if(p.frameCount % 3 == 0){
+                    	p.fill(0,60);
+                    	p.noStroke();
+                  		p.ellipse(p.random(p.width), p.random(p.height), 20, 20);
+                  }
+                  else if(p.frameCount % 3 == 1){
+                    	p.fill(100,60);
+                    	p.stroke(100,0,0,100);
+                      p.ellipse(p.random(p.width), p.random(p.height), 120, 120);
+                  }
+                  else if(p.frameCount % 3 == 2){
+                    	p.fill(200,60);
+                    	p.noStroke();
+                    	p.ellipse(p.random(p.width), p.random(p.height), 220, 220);
+                  }
+                }
+              };
+              var my1 = new p5(s1, 'c1');
+              </script>
+            </div>
+            <p>
+              <a href="https://www.openprocessing.org/sketch/414491">open sketch in openprocessing</a>
+            </p>
+
+          </div>
+        </div>
+        </div>
+        <div class="w3-third w3-container">
+
+           <ul class="w3-ul">
+             <li><h2>You will learn</h2></li>
+             <li>operators</li>
+             <li>assignment operators</li>
+             <li>comparison operators</li>
+             <li>logical operators</li>
+             <li>booleans</li>
+             <li>true</li>
+             <li>false</li>
+             <li>floor</li>
+             <li>ceil</li>
+             <li>AND</li>
+             <li>OR</li>
+           </ul>
+         </div>
+      </div>
+      <div class="w3-one w3-container">
+        <div class="w3-container">
+        <h2 class="w3-theme-l2 w3-center">assingment operators</h2>
+        <p>
+         =, +=, -=, *=, /=<br/>
+         The operator sum can add variables, numbers and strings.
+         When you add a string and a number, it will become a string!
+
+        </p>
+        <pre>
+var c = a + b;                // assign the result of a + b to c
+c += 1;                       // add 1 to the value of c
+var text = "start";
+text += " and add more text." // result text is "start and add more text."
+c -= 10;                      // subtract 10 from the value of c
+c *= 4;                       // multiply the value in c 4 times
+c /= 2;                       // devide the value of 4 by 2
+</pre>
+        </div>
+        <div class="w3-container">
+        <h2 class="w3-theme-l2 w3-center">Comparison operators</h2>
+        <p>
+         ==, ===, !=, <=, =><br/>
+         Comparison operators compare two variables or numbers, booleans or strings.
+         the result of an logical operator is true or false.<br/>
+         True and False are booleans. (meaning: YES / NO  or ON / OFF)
+         true == 1;   // is equal to 1
+         false == 0;  // is equal to 0.
+        </p>
+        <pre>
+a = b                  // is an assignment!
+but
+a == b;                // is true if the value of a is equal to the value of b;
+d === e;               // is true if the value of d is equal to the value of e and d and e are of the same type.
+f != g;                // is true if f is not equal to g;
+h < i                  // is true if h is smaller then i;
+j > k                  // is true if
+</pre>
+        </div>
+        <div class="w3-container">
+        <h2 class="w3-theme-l2 w3-center">Logical operators</h2>
+        <p>
+         &&, ||, !<br/>
+         With logical operators you can combine comparisons.<br/>
+         && means AND <br/>
+         || means OR  <br/>
+        </p>
+        <pre>
+if (a > 10 && a < 20 )      //is true if a is greater then 10 AND a is less then 20
+if (b < 10 || b > 20 )      //is true if b is less then 10 OR b is greater then 20
+</pre>
+
+        </div>
+    </div>
+
+  </div>
+
+
+      <div class="w3-row">
+        <div class="w3-one w3-container">
+          <div class="w3-container">
+            <br/>
+          <p>
+            When you have to write the same code twice or almost the same code, then it's time to create a function.
+            In the example above the function showSpeed is used twice.
+
+            Often functions are used to organize the code. <br/>
+            In the next example I have created first the pseudo-code in functions.
+          </p>
+        </div>
+      </div>
+    </div>
+<div class="w3-row  w3-theme-light ">
+<div class="w3-container w3-half">
+<pre>
+  // && AND
+  function draw(){
+  background(100);
+  fill(120,0,0,20);
+  rect(0,0, 400,300);
+  rect(100,100, 200,200);
+  if(x > 300 && x < 400){
+    x -= speed;
+  }
+  else if(x > 0 && x < 100){
+    x += speed;
+  }
+  if(y > 200 && y < 300){
+    y -= speed;
+  }
+  else if(y > 0 && y < 100){
+    y += speed;
+  }
+
+  x += random(-speed,speed);
+  y += random(-speed,speed);
+
+  noStroke();
+  fill(120,0,0);
+  ellipse(x, y, 75, 75);
+
+  </pre>
+
+  </div>
+
+  <div class="w3-half w3-container">
+    <div class="w3-example">
+
+      <br/>
+      <div id="divcanvas2">
+        <script>
+        var s2 = function( p ) {
+
+         var x,y; //positon of mouse
+         var speed;
+
+
+         p.setup = function() {
+           var canvas = p.createCanvas(400,400);
+           canvas.parent("divcanvas2");
+           x = p.width /2;
+           y = p.height /2;
+           speed = 20;
+         }
+         p.draw = function() {
+            p.background(255);
+            p.fill(120,0,0,20);
+            p.rect(0,0, 400,400);
+            p.rect(100,100, 200,200);
+            if(x > 300 && x < 400){
+            	x -= speed;
+            }
+            else if(x > 0 && x < 100){
+            	x += speed;
+            }
+            if(y > 300 && y < 400){
+            	y -= speed;
+            }
+            else if(y > 0 && y < 100){
+            	y += speed;
+            }
+
+            x += p.random(-speed,speed);
+            y += p.random(-speed,speed);
+
+            p.noStroke();
+            p.fill(120,0,0);
+            p.ellipse(x, y, 75, 75);
+          }
+
+
+      };
+        var my1 = new p5(s2, 'c1');
+        </script>
+      </div>
+      <p>
+        <a href="https://www.openprocessing.org/sketch/414530">open sketch in openprocessing</a>
+      </p>
+
+    </div>
+  </div>
+</div>
+
+<div class="w3-row  w3-theme-light ">
+<div class="w3-container w3-half">
+<pre>
+...
+// += with strings
+
+...
+function showTitle(){
+  if( frameCount % 100 < 25 ){
+    title = "Living";
+  }
+  else if(frameCount % 100 == 25){
+    title += " in";
+  }
+  else if(frameCount % 100 == 50){
+    title += " a";
+  }
+  else if(frameCount % 100 == 75){
+    title += " box";
+  }
+
+  fill(255);
+  textAlign(CENTER);
+  textSize(50);
+  text(title, width / 2, 150);
+}
+  ...
+  </pre>
+  </div>
+
+  <div class="w3-half w3-container">
+    <div class="w3-example">
+
+      <br/>
+      <div id="divcanvas4">
+
+          <script>
+
+          // += with strings
+
+          var x, y;
+          var speed;
+          var title;
+
+          var s1 = function( p) {
+          p.setup = function() {
+            var canvas = p.createCanvas(400,320);
+            canvas.parent("divcanvas4");
+            x = p.width /2;
+            y = p.height /2;
+            speed = 20;
+          }
+
+          p.draw = function() {
+            //background(100);
+
+            if( p.frameCount % 100 < 25 ){
+              title = "Living";
+            }
+            else if(p.frameCount % 100 == 25){
+              title += " in";
+            }
+            else if(p.frameCount % 100 == 50){
+              title += " a";
+            }
+            else if(p.frameCount % 100 == 75){
+              title += " box";
+            }
+
+            p.fill(255);
+            p.textAlign(p.CENTER);
+            p.textSize(30);
+            p.text(title, p.width / 2, 150);
+
+            p.fill(120,0,0,20);
+            //rect(0,0, 600,600);
+            p.rect(100,100, 400,400);
+
+            if(x > 500 && x < 600){
+            	x -= speed;
+            }
+            else if(x > 0 && x < 100){
+            	x += speed;
+            }
+            if(y > 500 && y < 600){
+            	y -= speed;
+            }
+            else if(y > 0 && y < 100){
+            	y += speed;
+            }
+
+            x += p.random(-speed,speed);
+            y += p.random(-speed,speed);
+
+            p.noStroke();
+            p.fill(120,0,0);
+            p.ellipse(x, y, 75, 75);
+          }
+          };
+          var my1 = new p5(s1, 'c1');
+        </script>
+      </div>
+      <p>
+        <a href="https://www.openprocessing.org/sketch/414564">open sketch in openprocessing</a>
+      </p>
+
+    </div>
+  </div>
+</div>
+
+  <div class="w3-row">
+      <div class="w3-one " style="padding:16px">
+  <h1  class="w3-theme-l2 w3-center w3-jumbo">Challenges</h1>
+  <h3>1. Create a jumping animal.</h3>
+  <ul class ="w3-ul" >
+      <li>Control your jumping animal with operators in a condion (IF).</li>
+  </ul>
+
+  <h3>2. Changing colors</h3>
+
+  <ul class ="w3-ul" >
+      <li>Change your fill color with a modulus operator on the frameCount</li>
+  </ul>
+
+  <h3>3. Poem with animation</h3>
+  <ul class ="w3-ul" >
+      <li>write a poem in 4 lines or use</li>
+      <li>Bla Bla Bla, a story or a chat.<br/>
+          Bla Bla Bla, about a dog or a cat.<br/>
+          Bla Bla Bla, I write it, you read it.<br/>
+          Bla Bla Bla, I'm glad we met.</li>
+
+      <li>Show your poem on the speed of the frameRate.</li>
+      <li>Change your background animation on the same speed.</li>
+      <li>You need an animation with 4 frames.</li>
+      <li>First make a sketch.</li>
+      <li>frameRate is very small.</li>
+  </ul>
+
+<hr>
+<p>
+
+Please join my class on OpenProcessing to share your Processing sketches.<br/>
+Go to:<a href="https:/www.openprocessing.org/class/55734"> https:/www.openprocessing.org/class/55734</a> and use the code: 30DEEA to join.<br/>
+Or publish an image of your sketch on Facebook page <a href="https://www.facebook.com/creativecodingcourse">https://www.facebook.com/creativecodingcourse</a><br/>
+It will be an inspiration for other students.<br/>
+If you have any question about this lesson, send me an email <a href="mailto:riastroes@gmail.com?subject:lesson12">riastroes@gmail.com</a></p>
+</p></div>
+</div>
+
+<footer class="w3-container w3-theme-d3 w3-padding-32" style="padding-left:32px">
+    <span class="w3-left"><a  href="http://www.riastroes.nl">www.riastroes.nl</a></span><span class="w3-right">copyright &copy; Ria Stroes</span>
+</footer>
+</div>
+<script>
+//include HTML
+w3IncludeHTML();
+
+// Open and close the sidenav on medium and small screens
+function w3_open() {
+    document.getElementById("mySidenav").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidenav").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+
+// Change style of top container on scroll
+window.onscroll = function() {myFunction()};
+function myFunction() {
+    if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+        document.getElementById("myTop").classList.add("w3-card-4");
+        document.getElementById("myIntro").classList.add("w3-show-inline-block");
+    } else {
+        document.getElementById("myIntro").classList.remove("w3-show-inline-block");
+        document.getElementById("myTop").classList.remove("w3-card-4");
+    }
+}
+
+// Accordions
+function myAccordion(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+        x.previousElementSibling.className += " w3-theme";
+    } else {
+        x.className = x.className.replace("w3-show", "");
+        x.previousElementSibling.className =
+        x.previousElementSibling.className.replace(" w3-theme", "");
+    }
+}
+</script>
+
+</body>
+</html>
